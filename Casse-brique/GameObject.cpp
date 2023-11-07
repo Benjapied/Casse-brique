@@ -1,15 +1,19 @@
 #include "GameObject.h"
 #include <SFML/Graphics.hpp>
 
+#include "Math.h"
+
 using namespace sf;
 
-GameObject::GameObject(char* type, RenderWindow* renderer)
+GameObject::GameObject(const char* type, RenderWindow* renderer)
 {
 	m_positionX = 0;
 	m_positionY = 0;
 	m_width = 1;
 	m_height = 1;
 	m_renderer = renderer;
+
+	m_direction = Vector2f(1,-1);
 
 	//shape can be a rectangle or a circle
 	if (type == "rectangle") {
@@ -36,5 +40,25 @@ void GameObject::SetSize(float w, float h)
 
 void GameObject::Draw()
 {
-	this->m_renderer->draw(this->m_shape);
+	m_renderer->draw(*m_shape);
+}
+
+void GameObject::SetColor(Color* color) 
+{
+	m_shape->setFillColor(*color);
+}
+
+void GameObject::ChangeDirection(float x,float y) {
+	m_direction = { x,y };
+	this->normaliezVector();
+}
+
+void GameObject::normaliezVector() 
+{
+	Math::normalize(&m_direction.x, &m_direction.y);
+}
+
+
+void GameObject::Move(float Deltatime) {
+	this->SetPosition(m_positionX + (m_direction.x * Deltatime * 100.f), m_positionY + (m_direction.y * Deltatime * 100.f));
 }
