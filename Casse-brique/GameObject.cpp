@@ -1,15 +1,20 @@
 #include "GameObject.h"
 #include <SFML/Graphics.hpp>
+#include <SFML/System.hpp>
 
 using namespace sf;
 
-GameObject::GameObject(char* type, RenderWindow* renderer)
+GameObject::GameObject(const char* type, RenderWindow* renderer)
 {
 	m_positionX = 0;
 	m_positionY = 0;
 	m_width = 1;
 	m_height = 1;
 	m_renderer = renderer;
+	m_velocity = 1;
+
+	m_direction = Vector2f (0,1);
+	m_rotationAxis = Vector2f (m_width/2, -(m_height*4/3));
 
 	//shape can be a rectangle or a circle
 	if (type == "rectangle") {
@@ -29,12 +34,37 @@ void GameObject::SetPosition(float x, float y)
 	this->m_shape->setPosition(x, y);
 };
 
-void GameObject::SetSize(float w, float h) 
+void GameObject::SetSize(float w, float h)
 {
 	this->m_shape->setScale(h, w);
-}
+};
 
 void GameObject::Draw()
 {
-	this->m_renderer->draw(this->m_shape);
+	m_renderer->draw(*m_shape);
+};
+
+void GameObject::SetColor(Color* color)
+{
+	m_shape->setFillColor(*color);
+};
+
+void GameObject::SetDirectionMouse(float x, float y)
+{
+	//m_direction = Vector2f(  );
+
 }
+
+void GameObject::Move(float dT)
+{
+	this->SetPosition(m_positionX + (m_direction.x * dT * 100.f * m_velocity ), m_positionY + (m_direction.y * dT * 100.f * m_velocity));
+}
+
+void GameObject::Rotate(float x, float y)
+{
+	m_shape->setOrigin(m_positionX + m_rotationAxis.x, m_positionY + m_rotationAxis.y);
+	float mouseAngle = -atan2(x - m_positionX, y - m_positionY) * 180 / 3.14159;
+	this->m_shape->setRotation(mouseAngle);
+
+}
+

@@ -1,24 +1,31 @@
 #include <SFML/Graphics.hpp>
+#include "GameObject.h"
+#include <iostream>
+#include <SFML/Window/Mouse.hpp>
+
+
 
 int main(int argc, char** argv)
 {
     //Création d'une fenêtre
-    sf::RenderWindow oWindow(sf::VideoMode(640, 480), "SFML");
+    sf::RenderWindow oWindow(sf::VideoMode(1280, 960), "SFML");
+    sf::Color cRed(255, 0, 0);
+    sf::Color cGreen(0, 255, 0);
+    sf::Color cBlue(0, 0, 255);
 
-    //Création d'un cercle de radius 100
-    sf::CircleShape oCircle(100.f);
-    //A la position 0, 0
-    oCircle.setPosition(0.f, 0.f);
-    //Et de couleur verte
-    oCircle.setFillColor(sf::Color::Green);
+    GameObject* objet = new GameObject("rectangle",&oWindow);
+    objet->SetPosition(50,50);
+    objet->SetSize(100, 100);
+    objet->SetColor(&cRed);
 
+    GameObject* cannon = new GameObject("rectangle", &oWindow);
+    cannon->SetPosition(640, 900);
+    cannon->SetSize(100, 50);
+    cannon->SetColor(&cGreen);
 
-    //Création d'un rectangle de taille 50, 50
-    sf::RectangleShape oRectangle(sf::Vector2f(50.f, 50.f));
-    //A la position 100, 100
-    oCircle.setPosition(100.f, 100.f);
-    //Et de couleur rouge
-    oRectangle.setFillColor(sf::Color::Red);
+    sf::Clock oClock;
+    float fDeltaTime = 1;
+    float clock = 0;
 
     //GameLoop
     while (oWindow.isOpen())
@@ -30,16 +37,23 @@ int main(int argc, char** argv)
             if (oEvent.type == sf::Event::Closed)
                 oWindow.close();
         }
+        sf::Vector2i localPosition = sf::Mouse::getPosition(oWindow);
 
         //UPDATE
+        cannon->Rotate(localPosition.x, localPosition.y);
+        objet->Move(fDeltaTime);
 
         //DRAW
         oWindow.clear();
 
-        oWindow.draw(oCircle);
-        oWindow.draw(oRectangle);
+        objet->Draw();
+        cannon->Draw();
 
         oWindow.display();
+
+        clock += fDeltaTime;
+
+        fDeltaTime = oClock.restart().asSeconds();
     }
 
     return 0;
