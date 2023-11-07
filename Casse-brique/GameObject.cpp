@@ -61,12 +61,9 @@ void GameObject::Move(float dT)
 
 void GameObject::Rotate(float x, float y)
 {
-	m_renderer->draw(*m_shape);
-}
-
-void GameObject::SetColor(Color* color) 
-{
-	m_shape->setFillColor(*color);
+	m_shape->setOrigin(m_positionX + m_rotationAxis.x, m_positionY + m_rotationAxis.y);
+	float mouseAngle = -atan2(x - m_positionX, y - m_positionY) * 180 / 3.14159;
+	this->m_shape->setRotation(mouseAngle);
 }
 
 void GameObject::ChangeDirection(float x,float y) {
@@ -77,14 +74,5 @@ void GameObject::ChangeDirection(float x,float y) {
 void GameObject::normaliezVector() 
 {
 	Math::normalize(&m_direction.x, &m_direction.y);
-}
-
-
-void GameObject::Move(float Deltatime) {
-	this->SetPosition(m_positionX + (m_direction.x * Deltatime * 100.f), m_positionY + (m_direction.y * Deltatime * 100.f));
-	m_shape->setOrigin(m_positionX + m_rotationAxis.x, m_positionY + m_rotationAxis.y);
-	float mouseAngle = -atan2(x - m_positionX, y - m_positionY) * 180 / 3.14159;
-	this->m_shape->setRotation(mouseAngle);
-
 }
 

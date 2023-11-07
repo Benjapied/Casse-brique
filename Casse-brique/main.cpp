@@ -7,8 +7,6 @@
 
 int main(int argc, char** argv)
 {
-    sf::Clock oClock;
-    float fDeltaTime=0;
 
     //Création d'une fenêtre
     sf::RenderWindow oWindow(sf::VideoMode(1280, 960), "SFML");

@@ -1,20 +1,3 @@
-<<<<<<< HEAD
 ﻿  GameObject.cpp
-C:\Users\barhancet\source\repos\Casse-brique\Casse-brique\GameObject.cpp(66,19): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
-  main.cpp
-C:\Users\barhancet\source\repos\Casse-brique\Casse-brique\main.cpp(43,54): warning C4244: 'argument' : conversion de 'T' en 'float', perte possible de données
-          with
-          [
-              T=int
-          ]
-C:\Users\barhancet\source\repos\Casse-brique\Casse-brique\main.cpp(43,37): warning C4244: 'argument' : conversion de 'T' en 'float', perte possible de données
-          with
-          [
-              T=int
-          ]
-  Génération de code en cours...
+C:\Users\barhancet\source\repos\Casse-brique\Casse-brique\GameObject.cpp(65,19): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
   Casse-brique.vcxproj -> C:\Users\barhancet\source\repos\Casse-brique\x64\Debug\Casse-brique.exe
-=======
-﻿  main.cpp
-  Casse-brique.vcxproj -> C:\Users\bturcat\Source\Repos\Benjapied\Casse-brique\x64\Debug\Casse-brique.exe
->>>>>>> 145440f182b7a5b9c9bda80b21bd29b889fd24b1

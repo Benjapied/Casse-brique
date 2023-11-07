@@ -34,7 +34,11 @@ public:
 
 	void SetDirectionMouse(float x, float y);
 
+	void ChangeDirection(float x, float y);
+
 	void Move(float dT);
+
+	void normaliezVector();
 
 	void Rotate(float x, float y);
 };
