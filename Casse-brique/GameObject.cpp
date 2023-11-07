@@ -15,6 +15,9 @@ GameObject::GameObject(const char* type, RenderWindow* renderer)
 	m_renderer = renderer;
 	m_velocity = 1;
 
+	m_direction = Vector2f (0,1);
+	m_rotationAxis = Vector2f (0.5, 0);
+
 	//shape can be a rectangle or a circle
 	if (type == "rectangle") {
 		m_shape = new RectangleShape(Vector2<float>(m_width, m_height));
@@ -50,8 +53,7 @@ void GameObject::SetColor(Color* color)
 
 void GameObject::SetDirectionMouse(float x, float y)
 {
-	//m_direction = Vector2f(  );
-
+	this->ChangeDirection( x - m_positionX, y - m_positionY);
 }
 
 void GameObject::Move(float dT)
@@ -61,7 +63,7 @@ void GameObject::Move(float dT)
 
 void GameObject::Rotate(float x, float y)
 {
-	m_shape->setOrigin(m_positionX + m_rotationAxis.x, m_positionY + m_rotationAxis.y);
+	m_shape->setOrigin(m_rotationAxis);
 	float mouseAngle = -atan2(x - m_positionX, y - m_positionY) * 180 / 3.14159;
 	this->m_shape->setRotation(mouseAngle);
 }
@@ -73,6 +75,7 @@ void GameObject::ChangeDirection(float x,float y) {
 
 void GameObject::normaliezVector() 
 {
+	if (m_direction.x == 0 && m_direction.y == 0)
+		return;
 	Math::normalize(&m_direction.x, &m_direction.y);
 }
-

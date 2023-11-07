@@ -43,6 +43,7 @@ int main(int argc, char** argv)
         //UPDATE
         cannon->Rotate(localPosition.x, localPosition.y);
         objet->Move(fDeltaTime);
+        objet->SetDirectionMouse(localPosition.x, localPosition.y);
 
         oWindow.clear();
 
