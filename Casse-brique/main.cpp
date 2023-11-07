@@ -7,6 +7,9 @@
 
 int main(int argc, char** argv)
 {
+    sf::Clock oClock;
+    float fDeltaTime=0;
+
     //Création d'une fenêtre
     sf::RenderWindow oWindow(sf::VideoMode(1280, 960), "SFML");
     sf::Color cRed(255, 0, 0);
@@ -43,7 +46,6 @@ int main(int argc, char** argv)
         cannon->Rotate(localPosition.x, localPosition.y);
         objet->Move(fDeltaTime);
 
-        //DRAW
         oWindow.clear();
 
         objet->Draw();
