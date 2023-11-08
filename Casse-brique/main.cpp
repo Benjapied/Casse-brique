@@ -2,7 +2,7 @@
 #include "GameObject.h"
 #include <iostream>
 #include <SFML/Window/Mouse.hpp>
-
+#include "Rectancle.h"
 
 
 int main(int argc, char** argv)
@@ -14,12 +14,12 @@ int main(int argc, char** argv)
     sf::Color cGreen(0, 255, 0);
     sf::Color cBlue(0, 0, 255);
 
-    GameObject* objet = new GameObject("rectangle",&oWindow);
+    GameObject* objet = new GameObject(&oWindow);
     objet->SetPosition(50,50);
     objet->SetSize(100, 100);
     objet->SetColor(&cRed);
 
-    GameObject* cannon = new GameObject("rectangle", &oWindow);
+    Rectangle* cannon = new Rectangle( &oWindow);
     cannon->SetPosition(640, 900);
     cannon->SetSize(100, 50);
     cannon->SetColor(&cGreen);
