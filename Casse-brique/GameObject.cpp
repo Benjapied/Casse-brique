@@ -13,7 +13,7 @@ GameObject::GameObject(RenderWindow* renderer)
 	m_width = 1;
 	m_height = 1;
 	m_renderer = renderer;
-	m_velocity = 1;
+	m_velocity = 2;
 	m_direction = Vector2f (0,1);
 	m_rotationAxis = Vector2f (0.5, 0);
 	m_shape = nullptr;
@@ -71,19 +71,13 @@ void GameObject::normaliezVector()
 }
 
 bool GameObject::Colision(GameObject* obj) {
-	if ((obj->m_positionX >= m_positionX + m_width)      // trop à droite
-		|| (obj->m_positionX + obj->m_width <= m_positionX) // trop à gauche
-		|| (obj->m_positionY >= m_positionY + m_height) // trop en bas
-		|| (obj->m_positionY + obj->m_height <= m_positionY))  // trop en haut
-		return false;
-	else
+	if (m_shape->getGlobalBounds().intersects(obj->m_shape->getGlobalBounds()))
 		return true;
+	else
+		return false;
 }
 
-void GameObject::Stop(bool collider)
+void GameObject::Bounce()
 {
-	if (collider == true)
-	{
-		this->ChangeDirection(0, 0);
-	}
+	this->ChangeDirection(0, -(m_direction.y));
 }

@@ -19,11 +19,30 @@ int main(int argc, char** argv)
     objet->SetPosition(640,50);
     objet->SetSize(50, 50);
     objet->SetColor(&cRed);
+    objet->ChangeDirection({1,1})
 
     Rectangle* cannon = new Rectangle(&oWindow);
     cannon->SetPosition(640, 700);
     cannon->SetSize(100, 50);
     cannon->SetColor(&cGreen);
+
+    Rectangle* wallUp = new Rectangle(&oWindow);
+    wallUp->SetPosition(0, -1);
+    wallUp->SetSize(1280, 1);
+
+    Rectangle* wallDown = new Rectangle(&oWindow);
+    wallDown->SetPosition(0, 960);
+    wallDown->SetSize(1280, 1);
+
+    Rectangle* wallLeft = new Rectangle(&oWindow);
+    wallLeft->SetPosition(-1, 0);
+    wallLeft->SetSize(1, 960);
+
+    Rectangle* wallRight = new Rectangle(&oWindow);
+    wallRight->SetPosition(1280, 0);
+    wallRight->SetSize(1, 960);
+
+    Rectangle* WallArray[4] = {wallUp,wallDown,wallLeft,wallRight};
 
     sf::Clock oClock;
     float fDeltaTime = 1;
@@ -43,9 +62,17 @@ int main(int argc, char** argv)
 
         //UPDATE
         cannon->Rotate(localPosition.x, localPosition.y);
+        
         objet->Move(fDeltaTime);
+        if (objet->Colision(cannon) == true)
+            objet->Bounce();
         //objet->SetDirectionMouse(localPosition.x, localPosition.y);
-        objet->Stop(objet->Colision(cannon));
+        
+        for (int i = 0; i < 4; i++) {
+            if (objet->Colision(WallArray[i]) == true)
+                objet->Bounce();
+            
+        }
 
         oWindow.clear();
 

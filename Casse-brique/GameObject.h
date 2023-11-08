@@ -44,5 +44,5 @@ public:
 
 	bool Colision(GameObject* obj);
 
-	void Stop(bool collider);
+	void Bounce();
 };
