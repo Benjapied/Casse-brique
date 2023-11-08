@@ -16,7 +16,7 @@ GameObject::GameObject(RenderWindow* renderer)
 	m_velocity = 1;
 	m_direction = Vector2f (0,1);
 	m_rotationAxis = Vector2f (0.5, 0);
-
+	m_shape = nullptr;
 };
 
 void GameObject::SetPosition(float x, float y)

@@ -3,7 +3,7 @@
 #include <iostream>
 #include <SFML/Window/Mouse.hpp>
 #include "Circle.h"
-
+#include "Rectangle.h"
 
 
 int main(int argc, char** argv)
@@ -20,7 +20,7 @@ int main(int argc, char** argv)
     objet->SetSize(100, 100);
     objet->SetColor(&cRed);
 
-    GameObject* cannon = new GameObject(&oWindow);
+    Rectangle* cannon = new Rectangle(&oWindow);
     cannon->SetPosition(640, 900);
     cannon->SetSize(100, 50);
     cannon->SetColor(&cGreen);
