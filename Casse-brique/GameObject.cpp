@@ -69,3 +69,21 @@ void GameObject::normaliezVector()
 		return;
 	Math::normalize(&m_direction.x, &m_direction.y);
 }
+
+bool GameObject::Colision(GameObject* obj) {
+	if ((obj->m_positionX >= m_positionX + m_width)      // trop à droite
+		|| (obj->m_positionX + obj->m_width <= m_positionX) // trop à gauche
+		|| (obj->m_positionY >= m_positionY + m_height) // trop en bas
+		|| (obj->m_positionY + obj->m_height <= m_positionY))  // trop en haut
+		return false;
+	else
+		return true;
+}
+
+void GameObject::Stop(bool collider)
+{
+	if (collider == true)
+	{
+		this->ChangeDirection(0, 0);
+	}
+}

@@ -41,4 +41,8 @@ public:
 	void normaliezVector();
 
 	void Rotate(float x, float y);
+
+	bool Colision(GameObject* obj);
+
+	void Stop(bool collider);
 };

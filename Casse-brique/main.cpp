@@ -16,12 +16,12 @@ int main(int argc, char** argv)
     sf::Color cBlue(0, 0, 255);
 
     Circle* objet = new Circle(&oWindow);
-    objet->SetPosition(50,50);
-    objet->SetSize(100, 100);
+    objet->SetPosition(640,50);
+    objet->SetSize(50, 50);
     objet->SetColor(&cRed);
 
     Rectangle* cannon = new Rectangle(&oWindow);
-    cannon->SetPosition(640, 900);
+    cannon->SetPosition(640, 700);
     cannon->SetSize(100, 50);
     cannon->SetColor(&cGreen);
 
@@ -44,7 +44,8 @@ int main(int argc, char** argv)
         //UPDATE
         cannon->Rotate(localPosition.x, localPosition.y);
         objet->Move(fDeltaTime);
-        objet->SetDirectionMouse(localPosition.x, localPosition.y);
+        //objet->SetDirectionMouse(localPosition.x, localPosition.y);
+        objet->Stop(objet->Colision(cannon));
 
         oWindow.clear();
 

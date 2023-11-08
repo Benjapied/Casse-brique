@@ -9,6 +9,5 @@ class Circle: public GameObject
 {
 public:
 	Circle(sf::RenderWindow* renderer);
-	sf::CircleShape* m_shape;
 };
 
