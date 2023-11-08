@@ -6,7 +6,7 @@
 
 using namespace sf;
 
-GameObject::GameObject(const char* type, RenderWindow* renderer)
+GameObject::GameObject(RenderWindow* renderer)
 {
 	m_positionX = 0;
 	m_positionY = 0;
@@ -14,19 +14,9 @@ GameObject::GameObject(const char* type, RenderWindow* renderer)
 	m_height = 1;
 	m_renderer = renderer;
 	m_velocity = 1;
-
 	m_direction = Vector2f (0,1);
 	m_rotationAxis = Vector2f (0.5, 0);
 
-	//shape can be a rectangle or a circle
-	if (type == "rectangle") {
-		m_shape = new RectangleShape(Vector2<float>(m_width, m_height));
-	}
-	else if (type == "circle") {
-		m_shape = new CircleShape(m_width);
-	}
-	this->SetSize(50, 50);
-	
 };
 
 void GameObject::SetPosition(float x, float y)

@@ -2,6 +2,7 @@
 #include "GameObject.h"
 #include <iostream>
 #include <SFML/Window/Mouse.hpp>
+#include "Circle.h"
 
 
 
@@ -14,12 +15,12 @@ int main(int argc, char** argv)
     sf::Color cGreen(0, 255, 0);
     sf::Color cBlue(0, 0, 255);
 
-    GameObject* objet = new GameObject("rectangle",&oWindow);
+    Circle* objet = new Circle(&oWindow);
     objet->SetPosition(50,50);
     objet->SetSize(100, 100);
     objet->SetColor(&cRed);
 
-    GameObject* cannon = new GameObject("rectangle", &oWindow);
+    GameObject* cannon = new GameObject(&oWindow);
     cannon->SetPosition(640, 900);
     cannon->SetSize(100, 50);
     cannon->SetColor(&cGreen);

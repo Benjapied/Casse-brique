@@ -22,7 +22,7 @@ public:
 	sf::Shape* m_shape;
 	sf::RenderWindow* m_renderer;
 
-	GameObject(const char* type, sf::RenderWindow* renderer);
+	GameObject(sf::RenderWindow* renderer);
 
 	void SetPosition(float x, float y);
 
