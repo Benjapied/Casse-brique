@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML/System.hpp>
 
+
 namespace sf
 {
 	class Shape;
@@ -45,4 +46,5 @@ public:
 	bool Colision(GameObject* obj);
 
 	void Bounce();
+
 };

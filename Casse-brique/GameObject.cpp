@@ -29,6 +29,8 @@ void GameObject::SetPosition(float x, float y)
 void GameObject::SetSize(float w, float h)
 {
 	this->m_shape->setScale(h, w);
+	this->m_width = w;
+	this->m_height = h;
 };
 
 void GameObject::Draw()
@@ -81,3 +83,4 @@ void GameObject::Bounce()
 {
 	this->ChangeDirection(0, -(m_direction.y));
 }
+
