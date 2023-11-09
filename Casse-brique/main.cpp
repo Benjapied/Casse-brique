@@ -4,6 +4,7 @@
 #include <SFML/Window/Mouse.hpp>
 #include "Circle.h"
 #include "Rectangle.h"
+#include <vector>
 
 
 int main(int argc, char** argv)
@@ -14,6 +15,8 @@ int main(int argc, char** argv)
     sf::Color cRed(255, 0, 0);
     sf::Color cGreen(0, 255, 0);
     sf::Color cBlue(0, 0, 255);
+
+    std::vector<Circle*> balls;
 
     Circle* objet = new Circle(&oWindow);
     objet->SetPosition(640,50);
@@ -62,7 +65,8 @@ int main(int argc, char** argv)
         sf::Vector2i localPosition = sf::Mouse::getPosition(oWindow);
 
         //UPDATE
-        //cannon->Rotate(localPosition.x, localPosition.y);
+        cannon->Rotate(localPosition.x, localPosition.y);
+        cannon->ChangeDirection(localPosition.x - cannon->m_positionX, localPosition.y - cannon->m_positionY);
         
         objet->Move(fDeltaTime);
         if (objet->Colision(cannon) != 0)
@@ -75,9 +79,24 @@ int main(int argc, char** argv)
             if (objet->Colision(WallArray[i]) != 0)
                 objet->Bounce();
         }
+        if (oEvent.type == sf::Event::MouseButtonPressed)
+        {
+            if (oEvent.mouseButton.button == sf::Mouse::Left)
+            {
+                Circle* ball = new Circle(&oWindow);
+                ball->SetSize(10, 10);
+                ball->SetColor(&cBlue);
+                ball->SetPosition(cannon->m_positionX +cannon->m_height * cannon->m_direction.x, cannon->m_positionY+ cannon->m_width/2 * cannon->m_direction.y);
+                ball->ChangeDirection(cannon->m_direction.x, cannon->m_direction.y);
+                balls.insert(balls.begin(), ball);
+            }
+        }
 
         oWindow.clear();
-
+        for (int i = 0; i < balls.size(); i++) {
+            balls[i]->Move(fDeltaTime);
+            balls[i]->Draw();
+        }
         objet->Draw();
         cannon->Draw();
 
