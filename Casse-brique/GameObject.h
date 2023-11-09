@@ -16,6 +16,7 @@ public:
 	float m_width;
 	float m_height;
 	float m_velocity;
+	bool m_bounce;
 	sf::Vector2f m_direction;
 	sf::Vector2f m_rotationAxis;
 
@@ -27,6 +28,8 @@ public:
 	void SetPosition(float x, float y);
 
 	void SetSize(float w, float h);
+
+	void SetBounce(bool bounce);
 
 	void Draw();
 
@@ -42,7 +45,7 @@ public:
 
 	void Rotate(float x, float y);
 
-	bool Colision(GameObject* obj);
+	int Colision(GameObject* obj);
 
 	void Bounce();
 };

@@ -19,11 +19,12 @@ int main(int argc, char** argv)
     objet->SetPosition(640,50);
     objet->SetSize(50, 50);
     objet->SetColor(&cRed);
-    objet->ChangeDirection({1,1})
+    objet->ChangeDirection(0, 1);
+    objet->SetBounce(true);
 
     Rectangle* cannon = new Rectangle(&oWindow);
     cannon->SetPosition(640, 700);
-    cannon->SetSize(100, 50);
+    cannon->SetSize(50, 50);
     cannon->SetColor(&cGreen);
 
     Rectangle* wallUp = new Rectangle(&oWindow);
@@ -61,17 +62,18 @@ int main(int argc, char** argv)
         sf::Vector2i localPosition = sf::Mouse::getPosition(oWindow);
 
         //UPDATE
-        cannon->Rotate(localPosition.x, localPosition.y);
+        //cannon->Rotate(localPosition.x, localPosition.y);
         
         objet->Move(fDeltaTime);
-        if (objet->Colision(cannon) == true)
+        if (objet->Colision(cannon) != 0)
+        {
             objet->Bounce();
+        }
         //objet->SetDirectionMouse(localPosition.x, localPosition.y);
         
         for (int i = 0; i < 4; i++) {
-            if (objet->Colision(WallArray[i]) == true)
+            if (objet->Colision(WallArray[i]) != 0)
                 objet->Bounce();
-            
         }
 
         oWindow.clear();

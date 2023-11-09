@@ -1,6 +1,7 @@
 #include "GameObject.h"
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
+#include <iostream>
 
 #include "Math.h"
 
@@ -13,9 +14,10 @@ GameObject::GameObject(RenderWindow* renderer)
 	m_width = 1;
 	m_height = 1;
 	m_renderer = renderer;
-	m_velocity = 2;
+	m_velocity = 3;
 	m_direction = Vector2f (0,1);
 	m_rotationAxis = Vector2f (0.5, 0);
+	m_bounce = 0;
 	m_shape = nullptr;
 };
 
@@ -28,7 +30,14 @@ void GameObject::SetPosition(float x, float y)
 
 void GameObject::SetSize(float w, float h)
 {
-	this->m_shape->setScale(h, w);
+	this->m_shape->setScale(w, h);
+	this->m_width = w;
+	this->m_height = h;
+};
+
+void GameObject::SetBounce(bool bounce)
+{
+	this->m_bounce = true;
 };
 
 void GameObject::Draw()
@@ -70,14 +79,75 @@ void GameObject::normaliezVector()
 	Math::normalize(&m_direction.x, &m_direction.y);
 }
 
-bool GameObject::Colision(GameObject* obj) {
-	if (m_shape->getGlobalBounds().intersects(obj->m_shape->getGlobalBounds()))
-		return true;
-	else
-		return false;
+int GameObject::Colision(GameObject* obj) {
+	int sens = 0;
+
+	int referenceX;
+	int referenceY;
+
+	int refMaxX;
+	int refMaxY;
+
+	bool xAxis = false;
+	bool yAxis = false;
+	if (this->m_width <= obj->m_width)
+	{
+		if (this->m_positionX <= obj->m_positionX + obj->m_width 
+		&&  this->m_positionX >= obj->m_positionX 
+		||	this->m_positionX + this->m_width <= obj->m_positionX + obj->m_width
+		&&  this->m_positionX + this->m_width >= obj->m_positionX
+		)
+		{
+			xAxis = true;
+		}
+	}
+	else if (this->m_width > obj->m_width)
+	{
+		if (obj->m_positionX <= this->m_positionX + this->m_width
+			&& obj->m_positionX >= this->m_positionX
+			|| obj->m_positionX + obj->m_width <= this->m_positionX + this->m_width
+			&& obj->m_positionX + obj->m_width >= this->m_positionX
+			)
+		{
+			xAxis = true;
+		}
+	}
+
+	if (this->m_height <= obj->m_height)
+	{
+		if ((this->m_positionY <= obj->m_positionY + obj->m_height
+			&& this->m_positionY >= obj->m_positionY)
+			|| (this->m_positionY + this->m_height <= obj->m_positionY + obj->m_height
+			&& this->m_positionY + this->m_height >= obj->m_positionY)
+			)
+		{
+			yAxis = true;
+		}
+	}
+	else if (this->m_height > obj->m_height)
+	{
+		if ((obj->m_positionY <= this->m_positionY + this->m_height
+			&& obj->m_positionY >= this->m_positionY)
+			|| (obj->m_positionY + obj->m_height <= this->m_positionY + this->m_height
+			&& obj->m_positionY + obj->m_height >= this->m_positionY)
+			)
+		{
+			yAxis = true;
+		}
+	}
+
+	if (yAxis == true && xAxis == true)
+	{
+		return 1;
+	}
+	return sens;
+	
 }
 
 void GameObject::Bounce()
 {
-	this->ChangeDirection(0, -(m_direction.y));
+	
+	this->ChangeDirection(m_direction.x, -(m_direction.y));
+	
+	//this->ChangeDirection(-(m_direction.x), m_direction.y);
 }
