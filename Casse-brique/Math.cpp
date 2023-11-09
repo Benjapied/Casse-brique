@@ -3,6 +3,7 @@
 
 void Math::normalize(float* x, float* y)
 {
-	*x /= sqrt(*x * *x + *y * *y);
-	*y /= sqrt(*x * *x + *y * *y);
+	float xtmp = *x;
+	*x /= sqrt(xtmp * xtmp + *y * *y);
+	*y /= sqrt(xtmp * xtmp + *y * *y);
 }
