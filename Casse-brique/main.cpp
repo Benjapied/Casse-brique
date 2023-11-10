@@ -30,7 +30,7 @@ int main(int argc, char** argv)
 
     Rectangle* cannon = new Rectangle(&oWindow);
     cannon->SetPosition(640, 700);
-    cannon->SetSize(50, 50);
+    cannon->SetSize(50, 100);
     cannon->SetColor(&cGreen);
 
     Rectangle* wallUp = new Rectangle(&oWindow);
@@ -70,8 +70,11 @@ int main(int argc, char** argv)
         sf::Vector2i localPosition = sf::Mouse::getPosition(oWindow);
 
         //UPDATE
-        cannon->Rotate(localPosition.x, localPosition.y);
-        cannon->ChangeDirection(localPosition.x - cannon->m_positionX, localPosition.y - cannon->m_positionY);
+        if (localPosition.y < cannon->m_positionY- cannon->m_width) {
+            cannon->Rotate(localPosition.x, localPosition.y);
+            cannon->ChangeDirection(localPosition.x - cannon->m_positionX, localPosition.y - cannon->m_positionY);
+        }
+        
         
         objet->Move(fDeltaTime);
         if (objet->Colision(cannon) != 0)

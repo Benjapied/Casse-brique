@@ -1,12 +1,2 @@
-﻿  main.cpp
-C:\Users\bturcat\source\repos\Benjapied\Casse-brique\Casse-brique\main.cpp(73,54): warning C4244: 'argument' : conversion de 'T' en 'float', perte possible de données
-          with
-          [
-              T=int
-          ]
-C:\Users\bturcat\source\repos\Benjapied\Casse-brique\Casse-brique\main.cpp(73,37): warning C4244: 'argument' : conversion de 'T' en 'float', perte possible de données
-          with
-          [
-              T=int
-          ]
+﻿  Game.cpp
   Casse-brique.vcxproj -> C:\Users\bturcat\Source\Repos\Benjapied\Casse-brique\x64\Debug\Casse-brique.exe
