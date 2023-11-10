@@ -4,6 +4,7 @@
 #include <SFML/Window/Mouse.hpp>
 #include "Circle.h"
 #include "Rectangle.h"
+#include "Game.h"
 #include <vector>
 
 
@@ -17,7 +18,9 @@ int main(int argc, char** argv)
     sf::Color cBlue(0, 0, 255);
 
     std::vector<Circle*> balls;
+    std::vector<Circle*>* ptrballs = &balls;
 
+    bool mouseState = false;
     Circle* objet = new Circle(&oWindow);
     objet->SetPosition(640,50);
     objet->SetSize(50, 50);
@@ -47,6 +50,8 @@ int main(int argc, char** argv)
     wallRight->SetSize(1, 960);
 
     Rectangle* WallArray[4] = {wallUp,wallDown,wallLeft,wallRight};
+
+    Game* test = new Game(&oWindow);
 
     sf::Clock oClock;
     float fDeltaTime = 1;
@@ -81,15 +86,17 @@ int main(int argc, char** argv)
         }
         if (oEvent.type == sf::Event::MouseButtonPressed)
         {
-            if (oEvent.mouseButton.button == sf::Mouse::Left)
-            {
-                Circle* ball = new Circle(&oWindow);
-                ball->SetSize(10, 10);
-                ball->SetColor(&cBlue);
-                ball->SetPosition(cannon->m_positionX +cannon->m_height * cannon->m_direction.x, cannon->m_positionY+ cannon->m_width/2 * cannon->m_direction.y);
-                ball->ChangeDirection(cannon->m_direction.x, cannon->m_direction.y);
-                balls.insert(balls.begin(), ball);
+            if (mouseState == false) {
+                if (oEvent.mouseButton.button == sf::Mouse::Left)
+                {
+                    test->Shoot(cannon, ptrballs, &cBlue);
+                    mouseState = true;
+                }
             }
+            
+        }
+        else if (oEvent.type == sf::Event::MouseButtonReleased) {
+            mouseState = false;
         }
 
         oWindow.clear();
