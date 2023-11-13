@@ -6,6 +6,7 @@
 #include "Rectangle.h"
 #include "Game.h"
 #include <vector>
+#include "FileManager.h"
 
 
 int main(int argc, char** argv)
@@ -51,11 +52,13 @@ int main(int argc, char** argv)
 
     Rectangle* WallArray[4] = {wallUp,wallDown,wallLeft,wallRight};
 
-    Game* test = new Game(&oWindow);
+    Game* game = new Game(&oWindow);
 
     sf::Clock oClock;
     float fDeltaTime = 1;
     float clock = 0;
+
+    FileManager::returnText("levels/level1.txt");
 
     //GameLoop
     while (oWindow.isOpen())
@@ -88,7 +91,7 @@ int main(int argc, char** argv)
             if (mouseState == false) {
                 if (oEvent.mouseButton.button == sf::Mouse::Left)
                 {
-                    test->Shoot(cannon, ptrballs, &cBlue);
+                    game->Shoot(cannon, ptrballs, &cBlue);
                     mouseState = true;
                 }
             }
@@ -106,6 +109,7 @@ int main(int argc, char** argv)
             }
             balls[i]->Draw();
         }
+        game->DrawBricks();
         objet->Draw();
         cannon->Draw();
 

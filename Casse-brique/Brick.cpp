@@ -1,11 +1,12 @@
 #include "Brick.h"
 #include <SFML/Graphics.hpp> 
 
-Brick::Brick(sf::RenderWindow* renderer, sf::Color** colorArray): Rectangle(renderer) {
+Brick::Brick(sf::RenderWindow* renderer, sf::Color** colorArray, int x, int y): Rectangle(renderer) {
 	m_life = 3;
 
 	this->SetColor(m_colorArray[m_life]);
-	this->SetSize(200,20);
+	this->SetSize(128,50);
+	this->SetPosition(x, y);
 };
 
 void Brick::Hit()

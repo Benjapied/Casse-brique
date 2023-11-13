@@ -8,9 +8,10 @@ public:
 	int m_life;
 	sf::Color** m_colorArray;
 
-	Brick(sf::RenderWindow* renderer, sf::Color** colorArray);
+	Brick(sf::RenderWindow* renderer, sf::Color** colorArray, int x, int y);
 
 	void Hit();
 };
+
 
 
