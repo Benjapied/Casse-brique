@@ -36,9 +36,12 @@
     <ClCompile Include="Brick.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="FileManager.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
+=======
+>>>>>>> 826bedf29a8166b63c27b8960d8de739fe3c5386
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -62,8 +65,11 @@
     <ClInclude Include="Brick.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="FileManager.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
+=======
+>>>>>>> 826bedf29a8166b63c27b8960d8de739fe3c5386
   </ItemGroup>
 </Project>

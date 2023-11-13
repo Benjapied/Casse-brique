@@ -12,5 +12,11 @@ Brick::Brick(sf::RenderWindow* renderer, sf::Color** colorArray, int x, int y): 
 void Brick::Hit()
 {
 	m_life--;
-	this->SetColor(m_colorArray[m_life]);
+	if (m_life == 0)
+	{
+		delete this;
+		return;
+	}
+	this->SetColor(m_colorArray[m_life-1]);
 }
+

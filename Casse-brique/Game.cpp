@@ -47,3 +47,9 @@ void Game::DrawBricks()
         m_brickArray->at(i)->Draw();
     }
 }
+}
+
+void Game::DeleteBall(std::vector<Circle*>* balls, int* i) {
+    balls->erase(balls->begin() + *i);
+}
+

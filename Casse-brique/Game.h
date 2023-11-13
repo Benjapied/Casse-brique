@@ -1,6 +1,7 @@
 #pragma once
 #include "Rectangle.h"
 #include "Circle.h"
+#include "Brick.h"
 #include <vector>
 
 class Brick;
@@ -19,5 +20,6 @@ public:
 	void LoadLevel(const char* path, sf::Color** ColorArray);
 
 	void DrawBricks();
+	void DeleteBall(std::vector<Circle*>* balls, int* i);
 };
 

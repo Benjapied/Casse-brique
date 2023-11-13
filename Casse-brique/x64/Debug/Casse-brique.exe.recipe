@@ -2,7 +2,11 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
+<<<<<<< HEAD
       <FullPath>C:\Users\barhancet\Source\Repos\Casse-brique\x64\Debug\Casse-brique.exe</FullPath>
+=======
+      <FullPath>C:\Users\bturcat\Source\Repos\Benjapied\Casse-brique\x64\Debug\Casse-brique.exe</FullPath>
+>>>>>>> 826bedf29a8166b63c27b8960d8de739fe3c5386
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles />

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 C:\Users\barhancet\source\repos\Casse-brique\Casse-brique\Brick.cpp;C:\Users\barhancet\source\repos\Casse-brique\Casse-brique\x64\Debug\Brick.obj
 C:\Users\barhancet\source\repos\Casse-brique\Casse-brique\Circle.cpp;C:\Users\barhancet\source\repos\Casse-brique\Casse-brique\x64\Debug\Circle.obj
 C:\Users\barhancet\source\repos\Casse-brique\Casse-brique\FileManager.cpp;C:\Users\barhancet\source\repos\Casse-brique\Casse-brique\x64\Debug\FileManager.obj
@@ -6,3 +7,12 @@ C:\Users\barhancet\source\repos\Casse-brique\Casse-brique\GameObject.cpp;C:\User
 C:\Users\barhancet\source\repos\Casse-brique\Casse-brique\main.cpp;C:\Users\barhancet\source\repos\Casse-brique\Casse-brique\x64\Debug\main.obj
 C:\Users\barhancet\source\repos\Casse-brique\Casse-brique\Math.cpp;C:\Users\barhancet\source\repos\Casse-brique\Casse-brique\x64\Debug\Math.obj
 C:\Users\barhancet\source\repos\Casse-brique\Casse-brique\Rectangle.cpp;C:\Users\barhancet\source\repos\Casse-brique\Casse-brique\x64\Debug\Rectangle.obj
+=======
+C:\Users\bturcat\source\repos\Benjapied\Casse-brique\Casse-brique\Brick.cpp;C:\Users\bturcat\source\repos\Benjapied\Casse-brique\Casse-brique\x64\Debug\Brick.obj
+C:\Users\bturcat\source\repos\Benjapied\Casse-brique\Casse-brique\Circle.cpp;C:\Users\bturcat\source\repos\Benjapied\Casse-brique\Casse-brique\x64\Debug\Circle.obj
+C:\Users\bturcat\source\repos\Benjapied\Casse-brique\Casse-brique\Game.cpp;C:\Users\bturcat\source\repos\Benjapied\Casse-brique\Casse-brique\x64\Debug\Game.obj
+C:\Users\bturcat\source\repos\Benjapied\Casse-brique\Casse-brique\GameObject.cpp;C:\Users\bturcat\source\repos\Benjapied\Casse-brique\Casse-brique\x64\Debug\GameObject.obj
+C:\Users\bturcat\source\repos\Benjapied\Casse-brique\Casse-brique\main.cpp;C:\Users\bturcat\source\repos\Benjapied\Casse-brique\Casse-brique\x64\Debug\main.obj
+C:\Users\bturcat\source\repos\Benjapied\Casse-brique\Casse-brique\Math.cpp;C:\Users\bturcat\source\repos\Benjapied\Casse-brique\Casse-brique\x64\Debug\Math.obj
+C:\Users\bturcat\source\repos\Benjapied\Casse-brique\Casse-brique\Rectangle.cpp;C:\Users\bturcat\source\repos\Benjapied\Casse-brique\Casse-brique\x64\Debug\Rectangle.obj
+>>>>>>> 826bedf29a8166b63c27b8960d8de739fe3c5386
