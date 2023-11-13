@@ -48,6 +48,6 @@ public:
 
 	int Colision(GameObject* obj);
 
-	void Bounce();
+	void Bounce(int i);
 
 };

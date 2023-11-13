@@ -25,7 +25,7 @@ int main(int argc, char** argv)
     objet->SetPosition(640,50);
     objet->SetSize(50, 50);
     objet->SetColor(&cRed);
-    objet->ChangeDirection(0, 1);
+    objet->ChangeDirection(2, 1);
     objet->SetBounce(true);
 
     Rectangle* cannon = new Rectangle(&oWindow);
@@ -77,15 +77,11 @@ int main(int argc, char** argv)
         
         
         objet->Move(fDeltaTime);
-        if (objet->Colision(cannon) != 0)
-        {
-            objet->Bounce();
-        }
+        objet->Bounce(objet->Colision(cannon));
         //objet->SetDirectionMouse(localPosition.x, localPosition.y);
         
         for (int i = 0; i < 4; i++) {
-            if (objet->Colision(WallArray[i]) != 0)
-                objet->Bounce();
+               objet->Bounce(objet->Colision(WallArray[i]));
         }
         if (oEvent.type == sf::Event::MouseButtonPressed)
         {
@@ -105,6 +101,9 @@ int main(int argc, char** argv)
         oWindow.clear();
         for (int i = 0; i < balls.size(); i++) {
             balls[i]->Move(fDeltaTime);
+            for (int j = 0; j < 4; j++) {
+                balls[i]->Bounce(balls[i]->Colision(WallArray[j]));
+            }
             balls[i]->Draw();
         }
         objet->Draw();

@@ -3,5 +3,9 @@
 namespace Math
 {
 	void normalize(float* x,float* y);
+
+	float min(float x, float y);
+
+	float abs(float x);
 };
 
