@@ -5,6 +5,7 @@
 #include "Circle.h"
 #include "Rectangle.h"
 #include "Game.h"
+#include "Brick.h"
 #include <vector>
 
 
@@ -13,9 +14,10 @@ int main(int argc, char** argv)
 
     //Création d'une fenêtre
     sf::RenderWindow oWindow(sf::VideoMode(1280, 960), "SFML");
-    sf::Color cRed(255, 0, 0);
-    sf::Color cGreen(0, 255, 0);
-    sf::Color cBlue(0, 0, 255);
+    sf::Color cRed = sf::Color::Red;
+    sf::Color cGreen= sf::Color::Green;
+    sf::Color cBlue=sf::Color::Blue;
+    sf::Color cYellow = sf::Color::Yellow;
 
     std::vector<Circle*> balls;
     std::vector<Circle*>* ptrballs = &balls;
@@ -37,10 +39,10 @@ int main(int argc, char** argv)
     wallUp->SetPosition(0, -1);
     wallUp->SetSize(1280, 1);
 
-    Rectangle* wallDown = new Rectangle(&oWindow);
+    /*Rectangle* wallDown = new Rectangle(&oWindow);
     wallDown->SetPosition(0, 960);
     wallDown->SetSize(1280, 1);
-
+    */
     Rectangle* wallLeft = new Rectangle(&oWindow);
     wallLeft->SetPosition(-1, 0);
     wallLeft->SetSize(1, 960);
@@ -49,9 +51,17 @@ int main(int argc, char** argv)
     wallRight->SetPosition(1280, 0);
     wallRight->SetSize(1, 960);
 
-    Rectangle* WallArray[4] = {wallUp,wallDown,wallLeft,wallRight};
+    sf::Color* deezColorArray[3] = { &cRed,&cBlue,&cGreen };
 
-    Game* test = new Game(&oWindow);
+    Brick* DeezBrick = new Brick(&oWindow, deezColorArray);
+    DeezBrick->SetPosition(780, 50);
+    DeezBrick->SetSize(100, 50);
+
+    Rectangle* WallArray[3] = {wallUp,wallLeft,wallRight};
+
+    Game* game = new Game(&oWindow);
+
+    game->m_bricks->push_back(DeezBrick);
 
     sf::Clock oClock;
     float fDeltaTime = 1;
@@ -74,13 +84,11 @@ int main(int argc, char** argv)
             cannon->Rotate(localPosition.x, localPosition.y);
             cannon->ChangeDirection(localPosition.x - cannon->m_positionX, localPosition.y - cannon->m_positionY);
         }
-        
-        
         objet->Move(fDeltaTime);
         objet->Bounce(objet->Colision(cannon));
         //objet->SetDirectionMouse(localPosition.x, localPosition.y);
         
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 3; i++) {
                objet->Bounce(objet->Colision(WallArray[i]));
         }
         if (oEvent.type == sf::Event::MouseButtonPressed)
@@ -88,7 +96,7 @@ int main(int argc, char** argv)
             if (mouseState == false) {
                 if (oEvent.mouseButton.button == sf::Mouse::Left)
                 {
-                    test->Shoot(cannon, ptrballs, &cBlue);
+                    game->Shoot(cannon, ptrballs, &cBlue);
                     mouseState = true;
                 }
             }
@@ -101,14 +109,23 @@ int main(int argc, char** argv)
         oWindow.clear();
         for (int i = 0; i < balls.size(); i++) {
             balls[i]->Move(fDeltaTime);
-            for (int j = 0; j < 4; j++) {
-                balls[i]->Bounce(balls[i]->Colision(WallArray[j]));
+            for (int j = 0; j < 3; j++) {
+                balls[i]->Bounce(balls[i]->Colision(WallArray[j]));                
+            }
+            balls[i]->Bounce(balls[i]->Colision(DeezBrick));
+            if (balls[i]->Colision(DeezBrick)) {
+                DeezBrick->Hit();
             }
             balls[i]->Draw();
+            if (balls[i]->m_positionY > 960) {
+                game->DeleteBall(&balls,&i);
+            }
         }
         objet->Draw();
         cannon->Draw();
-
+        for (int i = 0; i < game->m_bricks->size(); i++) {
+            game->m_bricks->at(i)->Draw();
+        }
         oWindow.display();
 
         clock += fDeltaTime;

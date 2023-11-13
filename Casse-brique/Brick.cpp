@@ -3,13 +3,19 @@
 
 Brick::Brick(sf::RenderWindow* renderer, sf::Color** colorArray): Rectangle(renderer) {
 	m_life = 3;
-
-	this->SetColor(m_colorArray[m_life]);
+	m_colorArray = colorArray;
+	this->SetColor(m_colorArray[m_life-1]);
 	this->SetSize(200,20);
 };
 
 void Brick::Hit()
 {
 	m_life--;
-	this->SetColor(m_colorArray[m_life]);
+	if (m_life == 0)
+	{
+		delete this;
+		return;
+	}
+	this->SetColor(m_colorArray[m_life-1]);
 }
+

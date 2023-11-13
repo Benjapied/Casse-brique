@@ -2,6 +2,7 @@
 
 Game::Game(sf::RenderWindow* renderer) {
 	m_renderer = renderer;
+    m_bricks =nullptr;
 }
 
 void Game::Shoot(Rectangle* cannon, std::vector<Circle*>* balls, sf::Color* col) {
@@ -12,3 +13,8 @@ void Game::Shoot(Rectangle* cannon, std::vector<Circle*>* balls, sf::Color* col)
     boule->ChangeDirection(cannon->m_direction.x, cannon->m_direction.y);
     balls->insert(balls->begin(), boule);
 }
+
+void Game::DeleteBall(std::vector<Circle*>* balls, int* i) {
+    balls->erase(balls->begin() + *i);
+}
+
