@@ -1,4 +1,18 @@
 ﻿  Game.cpp
-C:\Users\barhancet\source\repos\Casse-brique\Casse-brique\Game.cpp(39,79): warning C4244: 'argument' : conversion de 'float' en 'int', perte possible de données
-C:\Users\barhancet\source\repos\Casse-brique\Casse-brique\Game.cpp(39,76): warning C4244: 'argument' : conversion de 'float' en 'int', perte possible de données
-  Casse-brique.vcxproj -> C:\Users\barhancet\source\repos\Casse-brique\x64\Debug\Casse-brique.exe
+C:\Users\benja\source\repos\Benjapied\Casse-brique\Casse-brique\Game.cpp(35,79): warning C4244: 'argument' : conversion de 'float' en 'int', perte possible de données
+C:\Users\benja\source\repos\Benjapied\Casse-brique\Casse-brique\Game.cpp(35,76): warning C4244: 'argument' : conversion de 'float' en 'int', perte possible de données
+  main.cpp
+C:\Users\benja\source\repos\Benjapied\Casse-brique\Casse-brique\main.cpp(81,58): warning C4244: 'argument' : conversion de 'T' en 'float', perte possible de données
+          with
+          [
+              T=int
+          ]
+C:\Users\benja\source\repos\Benjapied\Casse-brique\Casse-brique\main.cpp(81,41): warning C4244: 'argument' : conversion de 'T' en 'float', perte possible de données
+          with
+          [
+              T=int
+          ]
+C:\Users\benja\source\repos\Benjapied\Casse-brique\Casse-brique\main.cpp(114,80): warning C4805: '==' : mélange risqué de type 'int' et de type 'bool' dans l'opération
+  Rectangle.cpp
+  Génération de code en cours...
+  Casse-brique.vcxproj -> C:\Users\benja\Source\Repos\Benjapied\Casse-brique\x64\Debug\Casse-brique.exe

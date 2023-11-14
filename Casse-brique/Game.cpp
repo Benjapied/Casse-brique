@@ -1,6 +1,7 @@
 #include "Game.h"
 #include "FileManager.h"
 #include "Brick.h"
+#include "Bullet.h"
 #include <string>
 #include <iostream>
 
@@ -9,13 +10,8 @@ Game::Game(sf::RenderWindow* renderer) {
 
 }
 
-void Game::Shoot(Rectangle* cannon, std::vector<Circle*>* balls, sf::Color* col) {
-    Circle* boule = new Circle(m_renderer);
-    boule->SetSize(10, 10);
-    boule->SetColor(col);
-    boule->SetPosition(cannon->m_positionX + cannon->m_width * cannon->m_direction.x, cannon->m_positionY + cannon->m_height / 2 * cannon->m_direction.y);
-    boule->ChangeDirection(cannon->m_direction.x, cannon->m_direction.y);
-    balls->insert(balls->begin(), boule);
+void Game::Shoot(Rectangle* cannon, sf::Color* col) {
+    m_bulletArray.push_back(new Bullet(m_renderer, col, cannon));
 }
 
 void Game::LoadLevel(const char* path, sf::Color** ColorArray)
@@ -55,7 +51,6 @@ void Game::DrawBricks()
 }
 
 
-void Game::DeleteBall(std::vector<Circle*>* balls, int* i) {
-    balls->erase(balls->begin() + *i);
+void Game::DeleteBall(int i) {
+    m_bulletArray.erase(m_bulletArray.begin() + i);
 }
-

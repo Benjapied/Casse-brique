@@ -20,9 +20,6 @@ int main(int argc, char** argv)
     sf::Color cBlue=sf::Color::Blue;
     sf::Color cYellow = sf::Color::Yellow;
 
-    std::vector<Circle*> balls;
-    std::vector<Circle*>* ptrballs = &balls;
-
     bool mouseState = false;
     Circle* objet = new Circle(&oWindow);
     objet->SetPosition(640,50);
@@ -53,16 +50,19 @@ int main(int argc, char** argv)
     wallRight->SetSize(1, 960);
 
     sf::Color* deezColorArray[3] = { &cRed,&cBlue,&cGreen };
+    Brick* DeezBrick = new Brick(&oWindow, deezColorArray, 520, 80);
 
     Rectangle* WallArray[3] = {wallUp,wallLeft,wallRight};
 
     Game* game = new Game(&oWindow);
 
+    game->m_brickArray.push_back(DeezBrick);
+
     sf::Clock oClock;
     float fDeltaTime = 1;
     float clock = 0;
 
-    game->LoadLevel("levels/level1.txt", deezColorArray);
+    //game->LoadLevel("levels/level1.txt", deezColorArray);
 
     //GameLoop
     while (oWindow.isOpen())
@@ -93,7 +93,7 @@ int main(int argc, char** argv)
             if (mouseState == false) {
                 if (oEvent.mouseButton.button == sf::Mouse::Left)
                 {
-                    game->Shoot(cannon, ptrballs, &cBlue);
+                    game->Shoot(cannon, &cBlue);
                     mouseState = true;
                 }
             }
@@ -104,27 +104,31 @@ int main(int argc, char** argv)
         }
 
         oWindow.clear();
-        for (int i = 0; i < balls.size(); i++) {
-            balls[i]->Move(fDeltaTime);
+        for (int i = 0; i < game->m_bulletArray.size(); i++) {
+            game->m_bulletArray[i]->Move(fDeltaTime);
             for (int j = 0; j < 3; j++) {
-                balls[i]->Bounce(balls[i]->Colision(WallArray[j]));                
+                game->m_bulletArray[i]->Bounce(game->m_bulletArray[i]->Colision(WallArray[j]));
             }
-            balls[i]->Draw();
-            if (balls[i]->m_positionY > 960) {
-                game->DeleteBall(&balls,&i);
+            for (int a = 0; a < game->m_brickArray.size(); a++) {
+                game->m_bulletArray[i]->Bounce(game->m_bulletArray[i]->Colision(game->m_brickArray[a]));
+                if (game->m_bulletArray[i]->Colision(game->m_brickArray[a]) == true)
+                {
+                    game->m_brickArray[a]->Hit();
+                }
+            }
+
+            game->m_bulletArray[i]->Draw();
+            if (game->m_bulletArray[i]->m_positionY > 960) {
+                game->DeleteBall(i);
             }
         }
         
         game->DrawBricks();
         objet->Draw();
         cannon->Draw();
-
-        game->DrawBricks();
-        
         oWindow.display();
 
         clock += fDeltaTime;
-
         fDeltaTime = oClock.restart().asSeconds();
     }
 
