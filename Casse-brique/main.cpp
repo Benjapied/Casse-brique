@@ -58,13 +58,11 @@ int main(int argc, char** argv)
 
     Game* game = new Game(&oWindow);
 
-    Game* test = new Game(&oWindow);
-
     sf::Clock oClock;
     float fDeltaTime = 1;
     float clock = 0;
 
-    FileManager::returnText("levels/level1.txt");
+    game->LoadLevel("levels/level1.txt", deezColorArray);
 
     //GameLoop
     while (oWindow.isOpen())
@@ -120,9 +118,9 @@ int main(int argc, char** argv)
         game->DrawBricks();
         objet->Draw();
         cannon->Draw();
-        for (int i = 0; i < game->m_brickArray->size(); i++) {
-            game->m_brickArray->at(i)->Draw();
-        }
+
+        game->DrawBricks();
+        
         oWindow.display();
 
         clock += fDeltaTime;

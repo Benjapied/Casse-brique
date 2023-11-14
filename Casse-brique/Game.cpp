@@ -2,10 +2,10 @@
 #include "FileManager.h"
 #include "Brick.h"
 #include <string>
+#include <iostream>
 
 Game::Game(sf::RenderWindow* renderer) {
 	m_renderer = renderer;
-    m_brickArray = nullptr;
 
 }
 
@@ -22,19 +22,22 @@ void Game::LoadLevel(const char* path, sf::Color** ColorArray)
 {
     std::string text = FileManager::returnText(path);
 
+    std::cout << text;
+
     float x = 0;
     float y = 0;
 
-    for (int i = 0; i < 72; i++)
+    for (int i = 0; i < text.length(); i++)
     {
         if (text[i] == ' ')
             x += 128;
         else if (text[i] == '\n') {
             y += 50;
+            x = 0;
         }
         else if (text[i] == 'b') {
-            m_brickArray->push_back(new Brick(this->m_renderer, ColorArray, x, y));
-
+            m_brickArray.push_back(new Brick(this->m_renderer, ColorArray, x, y));
+            x += 128;
         }
 
     }
@@ -42,12 +45,15 @@ void Game::LoadLevel(const char* path, sf::Color** ColorArray)
 
 void Game::DrawBricks()
 {
-    for (int i = 0; i < m_brickArray->size(); i++)
+    if (!m_brickArray.empty())
     {
-        m_brickArray->at(i)->Draw();
+        for (int i = 0; i < m_brickArray.size(); i++)
+        {
+            m_brickArray[i]->Draw();
+        }
     }
 }
-}
+
 
 void Game::DeleteBall(std::vector<Circle*>* balls, int* i) {
     balls->erase(balls->begin() + *i);

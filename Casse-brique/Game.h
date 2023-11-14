@@ -11,7 +11,7 @@ class Game
 public:
 
 	sf::RenderWindow* m_renderer;
-	std::vector<Brick*>* m_brickArray;
+	std::vector<Brick*> m_brickArray;
 
 	Game(sf::RenderWindow* renderer);
 
