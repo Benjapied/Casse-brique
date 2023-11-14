@@ -2,6 +2,7 @@
 #include "Rectangle.h"
 #include "Circle.h"
 #include "Brick.h"
+#include "Bullet.h"
 #include <vector>
 
 class Brick;
@@ -12,14 +13,15 @@ public:
 
 	sf::RenderWindow* m_renderer;
 	std::vector<Brick*> m_brickArray;
+	std::vector<Bullet*> m_bulletArray;
 
 	Game(sf::RenderWindow* renderer);
 
-	void Shoot(Rectangle* cannon, std::vector<Circle*>* balls, sf::Color* col);
+	void Shoot(Rectangle* cannon, sf::Color* col);
 
 	void LoadLevel(const char* path, sf::Color** ColorArray);
 
 	void DrawBricks();
-	void DeleteBall(std::vector<Circle*>* balls, int* i);
+	void DeleteBall(int i);
 };
 
