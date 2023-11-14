@@ -22,6 +22,7 @@ public:
 	void LoadLevel(const char* path, sf::Color** ColorArray);
 
 	void DrawBricks();
+	void DeleteBrick(int i);
 	void DeleteBall(int i);
 };
 

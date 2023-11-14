@@ -50,6 +50,12 @@ void Game::DrawBricks()
     }
 }
 
+void Game::DeleteBrick(int i) {
+    if (m_brickArray[i]->m_life == 0) {
+        m_brickArray.erase(m_brickArray.begin() + i);
+    }
+}
+
 
 void Game::DeleteBall(int i) {
     m_bulletArray.erase(m_bulletArray.begin() + i);

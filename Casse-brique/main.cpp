@@ -21,12 +21,7 @@ int main(int argc, char** argv)
     sf::Color cYellow = sf::Color::Yellow;
 
     bool mouseState = false;
-    Circle* objet = new Circle(&oWindow);
-    objet->SetPosition(640,50);
-    objet->SetSize(50, 50);
-    objet->SetColor(&cRed);
-    objet->ChangeDirection(2, 1);
-    objet->SetBounce(true);
+    
 
     Rectangle* cannon = new Rectangle(&oWindow);
     cannon->SetPosition(640, 700);
@@ -81,13 +76,8 @@ int main(int argc, char** argv)
             cannon->Rotate(localPosition.x, localPosition.y);
             cannon->ChangeDirection(localPosition.x - cannon->m_positionX, localPosition.y - cannon->m_positionY);
         }
-        objet->Move(fDeltaTime);
-        objet->Bounce(objet->Colision(cannon));
         //objet->SetDirectionMouse(localPosition.x, localPosition.y);
         
-        for (int i = 0; i < 3; i++) {
-               objet->Bounce(objet->Colision(WallArray[i]));
-        }
         if (oEvent.type == sf::Event::MouseButtonPressed)
         {
             if (mouseState == false) {
@@ -116,15 +106,15 @@ int main(int argc, char** argv)
                     game->m_brickArray[a]->Hit();
                 }
             }
-
             game->m_bulletArray[i]->Draw();
             if (game->m_bulletArray[i]->m_positionY > 960) {
                 game->DeleteBall(i);
             }
         }
-        
+        for (int k = 0; k < game->m_brickArray.size();k++) {
+            game->DeleteBrick(k);
+        }
         game->DrawBricks();
-        objet->Draw();
         cannon->Draw();
         oWindow.display();
 
