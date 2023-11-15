@@ -39,6 +39,6 @@ public:
 	void DeleteBrick();
 	void DeleteBall();
 	void CannonRotate(sf::Vector2i localPosition);
-	void GameLoop(sf::Vector2i localPosition, float dT);
+	void GameLoop();
 };
 

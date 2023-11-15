@@ -95,17 +95,6 @@ void Game::BulletBrickCol() {
     }
 }
 
-void Game::DrawBalls()
-{
-    if (!m_bulletArray.empty())
-    {
-        for (int i = 0; i < m_bulletArray.size(); i++)
-        {
-            m_bulletArray[i]->Draw();
-        }
-    }
-}
-
 void Game::DrawBricks()
 {
     if (!m_brickArray.empty())
@@ -154,14 +143,44 @@ void Game::CannonRotate(sf::Vector2i localPosition) {
     }
 }
 
-void Game::GameLoop(sf::Vector2i localPosition,float dT) {
-    CannonRotate(localPosition);
-    BulletMove(dT);
-    DeleteBall();
-    DeleteBrick();
-    BulletBrickCol();
-    BulletWallCol();
-    DrawBullets();
-    DrawBricks();
-    m_cannon->Draw();
+void Game::GameLoop() {
+    sf::Clock oClock;
+    float fDeltaTime = 1;
+    float clock = 0;
+    while (m_renderer->isOpen())
+    {
+        sf::Event oEvent;
+        while (m_renderer->pollEvent(oEvent))
+        {
+            if (oEvent.type == sf::Event::Closed)
+                m_renderer->close();
+        }
+        sf::Vector2i localPosition = sf::Mouse::getPosition(*m_renderer);
+
+        if (oEvent.type == sf::Event::MouseButtonPressed) {
+            if (m_mouseState == false) {
+                if (oEvent.mouseButton.button == sf::Mouse::Left) {
+                    Shoot();
+                    m_mouseState = true;
+                }
+            }
+        }
+        else if (oEvent.type == sf::Event::MouseButtonReleased) {
+            m_mouseState = false;
+        }
+        m_renderer->clear();
+        CannonRotate(localPosition);
+        BulletMove(fDeltaTime);
+        DeleteBall();
+        DeleteBrick();
+        BulletBrickCol();
+        BulletWallCol();
+        DrawBullets();
+        DrawBricks();
+        m_cannon->Draw();
+        m_renderer->display();
+        clock += fDeltaTime;
+        fDeltaTime = oClock.restart().asSeconds();
+    }
+    
 }
