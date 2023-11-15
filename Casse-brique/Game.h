@@ -30,6 +30,7 @@ public:
 	void Shoot();
 
 	void LoadLevel(const char* path);
+	void SetTextureBrick();
 
 	void BulletMove(float dT);
 	void BulletWallCol();

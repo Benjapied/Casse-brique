@@ -10,6 +10,7 @@
     <ClCompile Include="Math.cpp" />
     <ClCompile Include="Rectangle.cpp" />
     <ClCompile Include="Bullet.cpp" />
+    <ClCompile Include="TextureManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Brick.h" />
@@ -20,5 +21,6 @@
     <ClInclude Include="Math.h" />
     <ClInclude Include="Rectangle.h" />
     <ClInclude Include="Bullet.h" />
+    <ClInclude Include="TextureManager.h" />
   </ItemGroup>
 </Project>

@@ -5,6 +5,7 @@
 #include "Bullet.h"
 #include <string>
 #include <iostream>
+#include "TextureManager.h"
 
 Game::Game(sf::RenderWindow* renderer) {
 
@@ -53,6 +54,7 @@ void Game::LoadLevel(const char* path)
 
     float x = 0;
     float y = 0;
+    
 
     for (int i = 0; i < text.length(); i++)
     {
@@ -67,6 +69,19 @@ void Game::LoadLevel(const char* path)
             x += 128;
         }
 
+    }
+
+    SetTextureBrick();
+}
+
+void Game::SetTextureBrick()
+{
+    TextureManager texturePig("img/pig.jpg");
+
+    for (int i = 0; i < m_brickArray.size(); i++)
+    {
+        texturePig.SetTexture(m_brickArray[i]);
+        
     }
 }
 
