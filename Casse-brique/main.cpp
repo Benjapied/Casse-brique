@@ -45,19 +45,16 @@ int main(int argc, char** argv)
     wallRight->SetSize(1, 960);
 
     sf::Color* deezColorArray[3] = { &cRed,&cBlue,&cGreen };
-    Brick* DeezBrick = new Brick(&oWindow, deezColorArray, 520, 80);
 
     Rectangle* WallArray[3] = {wallUp,wallLeft,wallRight};
 
     Game* game = new Game(&oWindow);
 
-    game->m_brickArray.push_back(DeezBrick);
-
     sf::Clock oClock;
     float fDeltaTime = 1;
     float clock = 0;
 
-    //game->LoadLevel("levels/level1.txt", deezColorArray);
+    game->LoadLevel("levels/level1.txt", deezColorArray);
 
     //GameLoop
     while (oWindow.isOpen())
@@ -93,20 +90,23 @@ int main(int argc, char** argv)
             mouseState = false;
         }
 
-        oWindow.clear();
+
         for (int i = 0; i < game->m_bulletArray.size(); i++) {
             game->m_bulletArray[i]->Move(fDeltaTime);
+
+            //Checking for wall collider
             for (int j = 0; j < 3; j++) {
                 game->m_bulletArray[i]->Bounce(game->m_bulletArray[i]->Colision(WallArray[j]));
             }
+
             for (int a = 0; a < game->m_brickArray.size(); a++) {
                 game->m_bulletArray[i]->Bounce(game->m_bulletArray[i]->Colision(game->m_brickArray[a]));
-                if (game->m_bulletArray[i]->Colision(game->m_brickArray[a]) == true)
+                if (game->m_bulletArray[i]->Colision(game->m_brickArray[a]) != 0)
                 {
                     game->m_brickArray[a]->Hit();
                 }
             }
-            game->m_bulletArray[i]->Draw();
+            
             if (game->m_bulletArray[i]->m_positionY > 960) {
                 game->DeleteBall(i);
             }
@@ -114,7 +114,12 @@ int main(int argc, char** argv)
         for (int k = 0; k < game->m_brickArray.size();k++) {
             game->DeleteBrick(k);
         }
+
+        oWindow.clear();
+
         game->DrawBricks();
+        game->DrawBalls();
+        
         cannon->Draw();
         oWindow.display();
 

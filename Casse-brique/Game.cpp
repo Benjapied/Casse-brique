@@ -28,7 +28,7 @@ void Game::LoadLevel(const char* path, sf::Color** ColorArray)
         if (text[i] == ' ')
             x += 128;
         else if (text[i] == '\n') {
-            y += 50;
+            y += 58;
             x = 0;
         }
         else if (text[i] == 'b') {
@@ -36,6 +36,17 @@ void Game::LoadLevel(const char* path, sf::Color** ColorArray)
             x += 128;
         }
 
+    }
+}
+
+void Game::DrawBalls()
+{
+    if (!m_bulletArray.empty())
+    {
+        for (int i = 0; i < m_bulletArray.size(); i++)
+        {
+            m_bulletArray[i]->Draw();
+        }
     }
 }
 
@@ -52,11 +63,13 @@ void Game::DrawBricks()
 
 void Game::DeleteBrick(int i) {
     if (m_brickArray[i]->m_life == 0) {
+        delete m_brickArray[i];
         m_brickArray.erase(m_brickArray.begin() + i);
     }
 }
 
 
 void Game::DeleteBall(int i) {
+    delete m_bulletArray[i];
     m_bulletArray.erase(m_bulletArray.begin() + i);
 }

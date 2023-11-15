@@ -112,10 +112,10 @@ int GameObject::Colision(GameObject* obj) {
 
 	if (this->m_height <= obj->m_height)
 	{
-		if ((this->m_positionY <= obj->m_positionY + obj->m_height
-			&& this->m_positionY >= obj->m_positionY)
-			|| (this->m_positionY + this->m_height <= obj->m_positionY + obj->m_height
-			&& this->m_positionY + this->m_height >= obj->m_positionY)
+		if (this->m_positionY <= obj->m_positionY + obj->m_height
+			&& this->m_positionY >= obj->m_positionY
+			|| this->m_positionY + this->m_height <= obj->m_positionY + obj->m_height
+			&& this->m_positionY + this->m_height >= obj->m_positionY
 			)
 		{
 			yAxis = true;
@@ -123,11 +123,11 @@ int GameObject::Colision(GameObject* obj) {
 	}
 	else if (this->m_height > obj->m_height)
 	{
-		if ((obj->m_positionY <= this->m_positionY + this->m_height
-			&& obj->m_positionY >= this->m_positionY)
-			|| (obj->m_positionY + obj->m_height <= this->m_positionY + this->m_height
+		if (obj->m_positionY <= this->m_positionY + this->m_height
+			&& obj->m_positionY >= this->m_positionY
+			|| obj->m_positionY + obj->m_height <= this->m_positionY + this->m_height
 			&& obj->m_positionY + obj->m_height >= this->m_positionY)
-			)
+			
 		{
 			yAxis = true;
 		}
@@ -135,8 +135,8 @@ int GameObject::Colision(GameObject* obj) {
 
 	if (yAxis == true && xAxis == true)
 	{
-		referenceX = Math::min(Math::abs(this->m_positionX - obj->m_positionX + obj->m_width), Math::abs(this->m_positionX + this->m_width - obj->m_positionX));
-		referenceY = Math::min(Math::abs(this->m_positionY - obj->m_positionY + obj->m_height), Math::abs(this->m_positionY + this->m_height - obj->m_positionY));
+		referenceX = Math::min(Math::abs(this->m_positionX - (obj->m_positionX + obj->m_width)), Math::abs(this->m_positionX + this->m_width - obj->m_positionX));
+		referenceY = Math::min(Math::abs(this->m_positionY - (obj->m_positionY + obj->m_height)), Math::abs(this->m_positionY + this->m_height - obj->m_positionY));
 		//if vertical bounce, return 1 
 		//if horizontal bounce, return 2
 		if (referenceX <= referenceY)
