@@ -45,3 +45,10 @@ void FontManager::drawText(sf::RenderWindow* oWindow, const char* text)
 {
 	oWindow->draw(*m_texts[text]);
 };
+
+void FontManager::settings(const char* text, int size, sf::Color* color, int x, int y)
+{
+	m_texts[text]->setCharacterSize(size);
+	m_texts[text]->setFillColor(*color);
+	m_texts[text]->setPosition(x,y);
+};

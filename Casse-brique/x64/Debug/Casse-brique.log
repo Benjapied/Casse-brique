@@ -1,23 +1,2 @@
-﻿  FontManager.cpp
-  Game.cpp
-C:\Users\benar\source\repos\Casse-brique\Casse-brique\Game.cpp(93,74): warning C4244: 'argument' : conversion de 'float' en 'int', perte possible de données
-C:\Users\benar\source\repos\Casse-brique\Casse-brique\Game.cpp(93,69): warning C4244: 'argument' : conversion de 'float' en 'int', perte possible de données
-C:\Users\benar\source\repos\Casse-brique\Casse-brique\Game.cpp(168,56): warning C4244: 'argument' : conversion de 'T' en 'float', perte possible de données
-          with
-          [
-              T=int
-          ]
-C:\Users\benar\source\repos\Casse-brique\Casse-brique\Game.cpp(168,39): warning C4244: 'argument' : conversion de 'T' en 'float', perte possible de données
-          with
-          [
-              T=int
-          ]
-C:\Users\benar\source\repos\Casse-brique\Casse-brique\Game.cpp(230,68): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
-C:\Users\benar\source\repos\Casse-brique\Casse-brique\Game.cpp(230,48): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
-  GameObject.cpp
-C:\Users\benar\source\repos\Casse-brique\Casse-brique\GameObject.cpp(82,19): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
-C:\Users\benar\source\repos\Casse-brique\Casse-brique\GameObject.cpp(154,25): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
-C:\Users\benar\source\repos\Casse-brique\Casse-brique\GameObject.cpp(155,25): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
-  main.cpp
-  Génération de code en cours...
+﻿  main.cpp
   Casse-brique.vcxproj -> C:\Users\benar\Source\Repos\Casse-brique\x64\Debug\Casse-brique.exe

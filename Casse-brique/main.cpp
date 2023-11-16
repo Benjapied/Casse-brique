@@ -8,7 +8,7 @@ int main(int argc, char** argv)
     oWindow.setMouseCursorVisible(false);
     Game* game = new Game(&oWindow);
 
-    game->LoadLevel("levels/heart.txt");
+    game->LoadLevel("levels/level1.txt");
 
     game->GameLoop();
 

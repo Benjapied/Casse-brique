@@ -7,6 +7,7 @@ namespace sf {
 	class Font;
 	class Text;
 	class RenderWindow;
+	class Color;
 }
 class GameObject;
 
@@ -25,5 +26,7 @@ public:
 	void drawAllTexts(sf::RenderWindow* oWindow);
 
 	void drawText(sf::RenderWindow* oWindow, const char* text);
+
+	void settings(const char* text, int size, sf::Color* color, int x, int y);
 };
 

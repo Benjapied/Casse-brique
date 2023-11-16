@@ -15,6 +15,7 @@ Game::Game(sf::RenderWindow* renderer) {
     cGreen = sf::Color::Green;
     cBlue = sf::Color::Blue;
     cYellow = sf::Color::Yellow;
+    cBlack = sf::Color::Black;
 
     m_bulletLimit = 20;
 
@@ -25,11 +26,18 @@ Game::Game(sf::RenderWindow* renderer) {
     m_textureArray->addTexture("img/red.png");
     m_textureArray->addTexture("img/slingShot.png");
     m_textureArray->addTexture("img/crossair.png");
+    m_textureArray->addTexture("img/win.png");
+    m_textureArray->addTexture("img/loose.jpg");
 
     m_fontManager = new FontManager();
     m_fontManager->addFont("font/angrybirds-regular.ttf");
     m_fontManager->addText("Gagné !", 0);
+    m_fontManager->settings("Gagné !", 100, &cBlack, 500, 350);
     m_fontManager->addText("Perdu !", 0);
+    m_fontManager->settings("Perdu !", 100, &cBlack, 500, 350);
+    m_fontManager->addText("Balles maximum: 20", 0);
+    m_fontManager->settings("Balles maximum: 20", 20, &cBlack, 20, 15);
+
 
 	m_renderer = renderer;
     Rectangle* wallUp = new Rectangle(m_renderer);
@@ -55,6 +63,16 @@ Game::Game(sf::RenderWindow* renderer) {
     m_background->SetPosition(0, 0);
     m_background->SetSize(1280, 960);
     m_background->SetTexture(m_textureArray->m_tab[2]);
+
+    m_backgroundWin = new Rectangle(renderer);
+    m_backgroundWin->SetPosition(0, 0);
+    m_backgroundWin->SetSize(1280, 960);
+    m_backgroundWin->SetTexture(m_textureArray->m_tab[6]);
+
+    m_backgroundLoose = new Rectangle(renderer);
+    m_backgroundLoose->SetPosition(0, 0);
+    m_backgroundLoose->SetSize(1280, 960);
+    m_backgroundLoose->SetTexture(m_textureArray->m_tab[7]);
 
     m_crossair = new Rectangle(renderer);
     m_crossair->SetPosition(0, 0);
@@ -190,6 +208,10 @@ void Game::GameLoop() {
     float fDeltaTime = 1;
     float lastTime = 0;
     float clock = 0;
+
+    bool win = false;
+    bool loose = false;
+
     while (m_renderer->isOpen())
     {
         m_renderer->setFramerateLimit(60);
@@ -216,14 +238,34 @@ void Game::GameLoop() {
             }
         }
         if (WinCondition() == true) {
-            std::cout << std::endl;
-            std::cout << "You Won" << std::endl;
-            break;
+            win = true;
+            while (win)
+            {
+                if (oEvent.type == sf::Event::KeyPressed) {
+                    if (oEvent.key.code == sf::Keyboard::Escape) {
+                        win = false;
+                    }
+                }
+                m_renderer->clear();
+                m_backgroundWin->Draw();
+                m_fontManager->drawText(m_renderer, "Gagné !");
+                m_renderer->display();
+            }
         }
         if (LooseCondition() == true) {
-            std::cout << std::endl;
-            std::cout << "You Lost" << std::endl;
-            break;
+            loose = true;
+            while (loose)
+            {
+                if (oEvent.type == sf::Event::KeyPressed) {
+                    if (oEvent.key.code == sf::Keyboard::Escape) {
+                        loose = false;
+                    }
+                }
+                m_renderer->clear();
+                m_backgroundLoose->Draw();
+                m_fontManager->drawText(m_renderer, "Perdu !");
+                m_renderer->display();
+            }
         }
         m_renderer->clear();
         m_background->Draw();
@@ -237,6 +279,7 @@ void Game::GameLoop() {
         DrawBullets();
         DrawBricks();
         m_cannon->Draw();
+        m_fontManager->drawText(m_renderer, "Balles maximum: 20");
         m_crossair->Draw();
         m_renderer->display();
         clock += fDeltaTime;

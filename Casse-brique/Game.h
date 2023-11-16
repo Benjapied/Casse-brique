@@ -26,10 +26,15 @@ public:
 	Rectangle* m_cannon;
 	Rectangle* m_background;
 	Rectangle* m_crossair;
+	Rectangle* m_backgroundWin;
+	Rectangle* m_backgroundLoose;
+
 	sf::Color cRed;
 	sf::Color cBlue;
 	sf::Color cGreen;
 	sf::Color cYellow;
+	sf::Color cBlack;
+
 	bool m_mouseState;
 	int m_bulletLimit;
 
