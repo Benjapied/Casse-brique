@@ -6,6 +6,7 @@
 #include <string>
 #include <iostream>
 #include "TextureManager.h"
+#include "FontManager.h"
 #include <vector>
 
 Game::Game(sf::RenderWindow* renderer) {
@@ -15,7 +16,7 @@ Game::Game(sf::RenderWindow* renderer) {
     cBlue = sf::Color::Blue;
     cYellow = sf::Color::Yellow;
 
-    m_bulletLimit = 80;
+    m_bulletLimit = 20;
 
     m_textureArray = new TextureManager();
     m_textureArray->addTexture("img/pig.jpg");
@@ -24,6 +25,11 @@ Game::Game(sf::RenderWindow* renderer) {
     m_textureArray->addTexture("img/red.png");
     m_textureArray->addTexture("img/slingShot.png");
     m_textureArray->addTexture("img/crossair.png");
+
+    m_fontManager = new FontManager();
+    m_fontManager->addFont("font/angrybirds-regular.ttf");
+    m_fontManager->addText("Gagné !", 0);
+    m_fontManager->addText("Perdu !", 0);
 
 	m_renderer = renderer;
     Rectangle* wallUp = new Rectangle(m_renderer);
@@ -205,8 +211,9 @@ void Game::GameLoop() {
             }
         }
         else if (oEvent.type == sf::Event::MouseButtonReleased) {
-            
-            m_mouseState = false;
+            if (m_bulletArray.size() == 0) {
+                m_mouseState = false;
+            }
         }
         if (WinCondition() == true) {
             std::cout << std::endl;

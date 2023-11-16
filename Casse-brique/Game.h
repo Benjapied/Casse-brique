@@ -9,6 +9,7 @@
 class Brick;
 class Color;
 class TextureManager;
+class FontManager;
 
 class Game
 {
@@ -18,7 +19,10 @@ public:
 	std::vector<Rectangle*> m_wallArray;
 	std::vector<Brick*> m_brickArray;
 	std::vector<Bullet*> m_bulletArray;
+
 	TextureManager* m_textureArray;
+	FontManager* m_fontManager;
+
 	Rectangle* m_cannon;
 	Rectangle* m_background;
 	Rectangle* m_crossair;

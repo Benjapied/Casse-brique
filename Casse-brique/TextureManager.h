@@ -14,6 +14,5 @@ public:
 
 	void addTexture(const char* path);
 
-	void SetTexture(GameObject* obj, int index);
 };
 
