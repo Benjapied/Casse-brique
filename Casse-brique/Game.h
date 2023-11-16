@@ -41,5 +41,6 @@ public:
 	void DeleteBall();
 	void CannonRotate(sf::Vector2i localPosition);
 	void GameLoop();
+	bool WinCondition();
 };
 

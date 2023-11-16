@@ -35,7 +35,7 @@ Game::Game(sf::RenderWindow* renderer) {
     m_wallArray = { wallUp,wallLeft,wallRight };
 
     m_cannon = new Rectangle(m_renderer);
-    m_cannon->SetPosition(640, 700);
+    m_cannon->SetPosition(640, 800);
     m_cannon->SetSize(50, 100);
     m_cannon->SetColor(&cGreen);
 
@@ -126,7 +126,7 @@ void Game::DrawBullets()
 
 void Game::DeleteBrick() {
     for (int i = 0; i < m_brickArray.size(); i++) {
-        if (m_brickArray[i]->m_life == 0) {
+        if (m_brickArray[i]->m_life < 1) {
             delete m_brickArray[i];
             m_brickArray.erase(m_brickArray.begin() + i);
         }
@@ -148,6 +148,14 @@ void Game::CannonRotate(sf::Vector2i localPosition) {
         m_cannon->Rotate(localPosition.x, localPosition.y);
         m_cannon->ChangeDirection(localPosition.x - m_cannon->m_positionX, localPosition.y - m_cannon->m_positionY);
     }
+}
+
+bool Game::WinCondition()
+{
+    if (m_brickArray.size() == 0) {
+        return true;
+    }
+    return false;
 }
 
 void Game::GameLoop() {
@@ -173,8 +181,15 @@ void Game::GameLoop() {
             }
         }
         else if (oEvent.type == sf::Event::MouseButtonReleased) {
+            
             m_mouseState = false;
         }
+        if (WinCondition() == true) {
+            std::cout << std::endl;
+            std::cout << "You Won" << std::endl;
+            break;
+        }
+        std::cout << m_brickArray.size() << std::endl;
         m_renderer->clear();
         CannonRotate(localPosition);
         BulletMove(fDeltaTime);

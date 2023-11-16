@@ -69,7 +69,7 @@ void GameObject::SetDirectionMouse(float x, float y)
 
 void GameObject::Move(float dT)
 {
-	this->SetPosition(m_positionX + (m_direction.x * dT * 100.f * m_velocity ), m_positionY + (m_direction.y * dT * 100.f * m_velocity));
+	this->SetPosition(m_positionX + (m_direction.x * dT * 170.f * m_velocity ), m_positionY + (m_direction.y * dT * 170.f * m_velocity));
 }
 
 void GameObject::Rotate(float x, float y)
