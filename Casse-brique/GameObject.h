@@ -37,6 +37,8 @@ public:
 
 	void SetBounce(bool bounce);
 
+	void SetSpeed(float i);
+
 	void Draw();
 
 	void SetColor(sf::Color* color);

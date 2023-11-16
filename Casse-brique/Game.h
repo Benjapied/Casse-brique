@@ -21,6 +21,7 @@ public:
 	TextureManager* m_textureArray;
 	Rectangle* m_cannon;
 	Rectangle* m_background;
+	Rectangle* m_crossair;
 	sf::Color cRed;
 	sf::Color cBlue;
 	sf::Color cGreen;

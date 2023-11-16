@@ -51,6 +51,10 @@ void GameObject::SetBounce(bool bounce)
 	this->m_bounce = true;
 }
 
+void GameObject::SetSpeed(float i)
+{
+	this->m_velocity = i;
+}
 
 void GameObject::Draw()
 {

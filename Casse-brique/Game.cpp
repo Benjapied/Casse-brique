@@ -21,19 +21,20 @@ Game::Game(sf::RenderWindow* renderer) {
     m_textureArray->addTexture("img/background.jpg");
     m_textureArray->addTexture("img/red.png");
     m_textureArray->addTexture("img/slingShot.png");
+    m_textureArray->addTexture("img/crossair.png");
 
 	m_renderer = renderer;
     Rectangle* wallUp = new Rectangle(m_renderer);
     wallUp->SetPosition(0, -1);
-    wallUp->SetSize(1280, 1);
+    wallUp->SetSize(1280, 10);
 
     Rectangle* wallLeft = new Rectangle(m_renderer);
     wallLeft->SetPosition(-1, 0);
-    wallLeft->SetSize(1, 960);
+    wallLeft->SetSize(10, 960);
 
     Rectangle* wallRight = new Rectangle(m_renderer);
     wallRight->SetPosition(1280, 0);
-    wallRight->SetSize(1, 960);
+    wallRight->SetSize(10, 960);
 
     m_wallArray = { wallUp,wallLeft,wallRight };
 
@@ -46,6 +47,12 @@ Game::Game(sf::RenderWindow* renderer) {
     m_background->SetPosition(0, 0);
     m_background->SetSize(1280, 960);
     m_background->SetTexture(m_textureArray->m_tab[2]);
+
+    m_crossair = new Rectangle(renderer);
+    m_crossair->SetPosition(0, 0);
+    m_crossair->SetSize(50, 50);
+    m_crossair->SetSpeed(10);
+    m_crossair->SetTexture(m_textureArray->m_tab[5]);
 
     bool mouseState = false;
 }
@@ -194,8 +201,10 @@ void Game::GameLoop() {
             std::cout << "You Won" << std::endl;
             break;
         }
+        std::cout << clock << std::endl;
         m_renderer->clear();
         m_background->Draw();
+        m_crossair->SetPosition(localPosition.x-25, localPosition.y-25);
         CannonRotate(localPosition);
         BulletMove(fDeltaTime);
         DeleteBall();
@@ -206,6 +215,7 @@ void Game::GameLoop() {
         DrawBricks();
         
         m_cannon->Draw();
+        m_crossair->Draw();
         m_renderer->display();
         clock += fDeltaTime;
         fDeltaTime = oClock.restart().asSeconds();
