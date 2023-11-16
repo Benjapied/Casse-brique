@@ -7,7 +7,7 @@ int main(int argc, char** argv)
     sf::RenderWindow oWindow(sf::VideoMode(1280, 960), "SFML");
     Game* game = new Game(&oWindow);
 
-    game->LoadLevel("levels/leveld.txt");
+    game->LoadLevel("levels/level2.txt");
 
     game->GameLoop();
 

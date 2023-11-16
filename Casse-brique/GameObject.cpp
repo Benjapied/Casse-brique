@@ -38,7 +38,7 @@ void GameObject::SetSize(float w, float h)
 
 void GameObject::ResizeTexture( int x, int y, int w, int h)
 {
-	m_shape->setTextureRect(sf::IntRect(x, y, h, w));
+	m_shape->setTextureRect(sf::IntRect(x, y, w, h));
 }
 
 void GameObject::SetTexture(Texture* texture)

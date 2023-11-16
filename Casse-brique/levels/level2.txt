@@ -1,8 +1,4 @@
-bbbbbbbbbb
-bb  bb  bb
-bb  bb  bb
-bbbb  bbbb
-bb      bb
-bb  bb  bb
-bb  bb  bb
-bbbbbbbbbb
+
+
+      bbbb
+      bbbb

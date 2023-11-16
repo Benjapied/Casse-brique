@@ -20,6 +20,7 @@ public:
 	std::vector<Bullet*> m_bulletArray;
 	TextureManager* m_textureArray;
 	Rectangle* m_cannon;
+	Rectangle* m_background;
 	sf::Color cRed;
 	sf::Color cBlue;
 	sf::Color cGreen;

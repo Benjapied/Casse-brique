@@ -8,8 +8,9 @@ Brick::Brick(sf::RenderWindow* renderer, std::vector<sf::Texture*>textureArray, 
 	m_textureArray = textureArray;
 
 	this->SetTexture(m_textureArray[1]);
-	this->SetSize(120,50);
-	this->SetPosition(x+4, y+2);
+	this->ResizeTexture(280, 240, 1409, 740);
+	this->SetSize(76,46);
+	this->SetPosition(x, y);
 };
 
 void Brick::Hit()
@@ -17,6 +18,7 @@ void Brick::Hit()
 	m_life--;
 	if (m_life > 0) {
 		this->SetTexture(m_textureArray[m_life - 1]);
+		this->ResizeTexture(120, 153, 1409, 740);
 	}
 }
 

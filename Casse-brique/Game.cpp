@@ -18,6 +18,9 @@ Game::Game(sf::RenderWindow* renderer) {
     m_textureArray = new TextureManager();
     m_textureArray->addTexture("img/pig.jpg");
     m_textureArray->addTexture("img/pigLow.jpg");
+    m_textureArray->addTexture("img/background.jpg");
+    m_textureArray->addTexture("img/red.png");
+    m_textureArray->addTexture("img/slingShot.png");
 
 	m_renderer = renderer;
     Rectangle* wallUp = new Rectangle(m_renderer);
@@ -35,16 +38,20 @@ Game::Game(sf::RenderWindow* renderer) {
     m_wallArray = { wallUp,wallLeft,wallRight };
 
     m_cannon = new Rectangle(m_renderer);
-    m_cannon->SetPosition(640, 800);
-    m_cannon->SetSize(50, 100);
-    m_cannon->SetColor(&cGreen);
+    m_cannon->SetPosition(640, 765);
+    m_cannon->SetSize(100, 180);
+    m_cannon->SetTexture(m_textureArray->m_tab[4]);
 
+    m_background = new Rectangle(renderer);
+    m_background->SetPosition(0, 0);
+    m_background->SetSize(1280, 960);
+    m_background->SetTexture(m_textureArray->m_tab[2]);
 
     bool mouseState = false;
 }
 
 void Game::Shoot() {
-        m_bulletArray.push_back(new Bullet(m_renderer, &cYellow, m_cannon));
+        m_bulletArray.push_back(new Bullet(m_renderer, m_textureArray->m_tab[3], m_cannon));
 }
 
 void Game::LoadLevel(const char* path)
@@ -55,8 +62,6 @@ void Game::LoadLevel(const char* path)
     pigArray.push_back(this->m_textureArray->m_tab[1]);
     pigArray.push_back(this->m_textureArray->m_tab[0]);
 
-    std::cout << text;
-
     float x = 0;
     float y = 0;
     
@@ -64,14 +69,14 @@ void Game::LoadLevel(const char* path)
     for (int i = 0; i < text.length(); i++)
     {
         if (text[i] == ' ')
-            x += 128;
+            x += 80;
         else if (text[i] == '\n') {
-            y += 58;
+            y += 48;
             x = 0;
         }
         else if (text[i] == 'b') {
-            m_brickArray.push_back(new Brick(m_renderer, pigArray, x, y));
-            x += 128;
+            m_brickArray.push_back(new Brick(m_renderer, pigArray, x+4, y+2));
+            x += 80;
         }
 
     }
@@ -189,8 +194,8 @@ void Game::GameLoop() {
             std::cout << "You Won" << std::endl;
             break;
         }
-        std::cout << m_brickArray.size() << std::endl;
         m_renderer->clear();
+        m_background->Draw();
         CannonRotate(localPosition);
         BulletMove(fDeltaTime);
         DeleteBall();
@@ -199,6 +204,7 @@ void Game::GameLoop() {
         BulletWallCol();
         DrawBullets();
         DrawBricks();
+        
         m_cannon->Draw();
         m_renderer->display();
         clock += fDeltaTime;

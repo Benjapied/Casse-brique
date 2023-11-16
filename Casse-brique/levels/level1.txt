@@ -1,5 +1,6 @@
- bb bb bb 
- bbb  bbb
- b  bb  b
-bbbbbbbbbb
-
+ bb  bb  bb  bb 
+ bbbbbb  bbbbbb
+bbb  bbbbbb  bbb
+ bb  bb  bb  bb
+  bbb bbbb bbb
+    bbbbbbbb
