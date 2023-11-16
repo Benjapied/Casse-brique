@@ -158,6 +158,14 @@ void Game::CannonRotate(sf::Vector2i localPosition) {
     }
 }
 
+bool Game::WinCondition()
+{
+    if (m_brickArray.size() == 3) {
+        return true;
+    }
+    return false;
+}
+
 void Game::GameLoop() {
     sf::Clock oClock;
     float fDeltaTime = 1;
@@ -184,6 +192,11 @@ void Game::GameLoop() {
             if (m_bulletArray.size() == 0) {
                 m_mouseState = false;
             }
+        }
+        if (WinCondition() == true) {
+            std::cout << std::endl;
+            std::cout << "You Won" << std::endl;
+            break;
         }
         m_renderer->clear();
         CannonRotate(localPosition);
