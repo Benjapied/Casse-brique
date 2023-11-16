@@ -14,7 +14,6 @@ Game::Game(sf::RenderWindow* renderer) {
     cBlue = sf::Color::Blue;
     cYellow = sf::Color::Yellow;
 
-    m_ColorArray.push_back(&cRed);
     m_ColorArray.push_back(&cBlue);
     m_ColorArray.push_back(&cGreen);
 
@@ -134,7 +133,7 @@ void Game::DrawBullets()
 
 void Game::DeleteBrick() {
     for (int i = 0; i < m_brickArray.size(); i++) {
-        if (m_brickArray[i]->m_life == 0) {
+        if (m_brickArray[i]->m_life < 1) {
             delete m_brickArray[i];
             m_brickArray.erase(m_brickArray.begin() + i);
         }
@@ -160,7 +159,7 @@ void Game::CannonRotate(sf::Vector2i localPosition) {
 
 bool Game::WinCondition()
 {
-    if (m_brickArray.size() == 3) {
+    if (m_brickArray.size() == 0) {
         return true;
     }
     return false;
@@ -189,15 +188,15 @@ void Game::GameLoop() {
             }
         }
         else if (oEvent.type == sf::Event::MouseButtonReleased) {
-            if (m_bulletArray.size() == 0) {
-                m_mouseState = false;
-            }
+            
+            m_mouseState = false;
         }
         if (WinCondition() == true) {
             std::cout << std::endl;
             std::cout << "You Won" << std::endl;
             break;
         }
+        std::cout << m_brickArray.size() << std::endl;
         m_renderer->clear();
         CannonRotate(localPosition);
         BulletMove(fDeltaTime);
