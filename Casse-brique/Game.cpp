@@ -34,7 +34,7 @@ Game::Game(sf::RenderWindow* renderer) {
     m_wallArray = { wallUp,wallLeft,wallRight };
 
     m_cannon = new Rectangle(m_renderer);
-    m_cannon->SetPosition(640, 700);
+    m_cannon->SetPosition(640, 800);
     m_cannon->SetSize(50, 100);
     m_cannon->SetColor(&cGreen);
 
@@ -144,7 +144,7 @@ void Game::DeleteBrick() {
 
 void Game::DeleteBall() {
     for (int i = 0; i < m_bulletArray.size(); i++) {
-        if (m_bulletArray[i]->m_positionX >= 980) {
+        if (m_bulletArray[i]->m_positionY >= 980) {
             delete m_bulletArray[i];
             m_bulletArray.erase(m_bulletArray.begin() + i);
         }
@@ -181,7 +181,9 @@ void Game::GameLoop() {
             }
         }
         else if (oEvent.type == sf::Event::MouseButtonReleased) {
-            m_mouseState = false;
+            if (m_bulletArray.size() == 0) {
+                m_mouseState = false;
+            }
         }
         m_renderer->clear();
         CannonRotate(localPosition);
