@@ -1,2 +1,14 @@
-﻿  main.cpp
-  Casse-brique.vcxproj -> C:\Users\barhancet\source\repos\Casse-brique\x64\Debug\Casse-brique.exe
+﻿  Game.cpp
+C:\Users\benja\source\repos\Benjapied\Casse-brique\Casse-brique\Game.cpp(80,74): warning C4244: 'argument' : conversion de 'float' en 'int', perte possible de données
+C:\Users\benja\source\repos\Benjapied\Casse-brique\Casse-brique\Game.cpp(80,69): warning C4244: 'argument' : conversion de 'float' en 'int', perte possible de données
+C:\Users\benja\source\repos\Benjapied\Casse-brique\Casse-brique\Game.cpp(155,56): warning C4244: 'argument' : conversion de 'T' en 'float', perte possible de données
+          with
+          [
+              T=int
+          ]
+C:\Users\benja\source\repos\Benjapied\Casse-brique\Casse-brique\Game.cpp(155,39): warning C4244: 'argument' : conversion de 'T' en 'float', perte possible de données
+          with
+          [
+              T=int
+          ]
+  Casse-brique.vcxproj -> C:\Users\benja\Source\Repos\Benjapied\Casse-brique\x64\Debug\Casse-brique.exe

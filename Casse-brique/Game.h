@@ -26,6 +26,7 @@ public:
 	sf::Color cGreen;
 	sf::Color cYellow;
 	bool m_mouseState;
+	int m_bulletLimit;
 
 	Game(sf::RenderWindow* renderer);
 
@@ -43,5 +44,6 @@ public:
 	void CannonRotate(sf::Vector2i localPosition);
 	void GameLoop();
 	bool WinCondition();
+	bool LooseCondition();
 };
 
