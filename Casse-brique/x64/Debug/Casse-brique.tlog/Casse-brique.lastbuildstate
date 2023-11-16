@@ -1,2 +1,7 @@
+<<<<<<< HEAD
 PlatformToolSet=v143:VCToolArchitecture=Native64Bit:VCToolsVersion=14.34.31933:TargetPlatformVersion=10.0.22000.0:
 Debug|x64|C:\Users\benar\Source\Repos\Casse-brique\|
+=======
+PlatformToolSet=v143:VCToolArchitecture=Native64Bit:VCToolsVersion=14.35.32215:TargetPlatformVersion=10.0.22000.0:
+Debug|x64|C:\Users\benja\Source\Repos\Benjapied\Casse-brique\|
+>>>>>>> 18ed4b487e7d4027296acd4f132aa154c0296ae0

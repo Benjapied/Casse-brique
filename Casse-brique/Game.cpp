@@ -15,6 +15,8 @@ Game::Game(sf::RenderWindow* renderer) {
     cBlue = sf::Color::Blue;
     cYellow = sf::Color::Yellow;
 
+    m_bulletLimit = 80;
+
     m_textureArray = new TextureManager();
     m_textureArray->addTexture("img/pig.jpg");
     m_textureArray->addTexture("img/pigLow.jpg");
@@ -170,12 +172,21 @@ bool Game::WinCondition()
     return false;
 }
 
+bool Game::LooseCondition() {
+    if (m_brickArray.size() > 0 && m_bulletLimit == 0 && m_bulletArray.size() == 0 ) {
+        return true;
+    }
+    return false;
+}
+
 void Game::GameLoop() {
     sf::Clock oClock;
     float fDeltaTime = 1;
+    float lastTime = 0;
     float clock = 0;
     while (m_renderer->isOpen())
     {
+        m_renderer->setFramerateLimit(60);
         sf::Event oEvent;
         while (m_renderer->pollEvent(oEvent))
         {
@@ -185,10 +196,11 @@ void Game::GameLoop() {
         sf::Vector2i localPosition = sf::Mouse::getPosition(*m_renderer);
 
         if (oEvent.type == sf::Event::MouseButtonPressed) {
-            if (m_mouseState == false) {
+            if (m_mouseState == false && m_bulletLimit > 0) {
                 if (oEvent.mouseButton.button == sf::Mouse::Left) {
                     Shoot();
                     m_mouseState = true;
+                    m_bulletLimit -= 1;
                 }
             }
         }
@@ -201,7 +213,11 @@ void Game::GameLoop() {
             std::cout << "You Won" << std::endl;
             break;
         }
-        std::cout << clock << std::endl;
+        if (LooseCondition() == true) {
+            std::cout << std::endl;
+            std::cout << "You Lost" << std::endl;
+            break;
+        }
         m_renderer->clear();
         m_background->Draw();
         m_crossair->SetPosition(localPosition.x-25, localPosition.y-25);
@@ -213,12 +229,14 @@ void Game::GameLoop() {
         BulletWallCol();
         DrawBullets();
         DrawBricks();
-        
         m_cannon->Draw();
         m_crossair->Draw();
         m_renderer->display();
         clock += fDeltaTime;
         fDeltaTime = oClock.restart().asSeconds();
+        float currentTime = fDeltaTime;
+        float fps = 1.f / currentTime;
+        lastTime = currentTime;
     }
     
 }
