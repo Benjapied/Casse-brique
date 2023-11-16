@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 #include <iostream>
+#include "TextureManager.h"
 
 #include "Math.h"
 
@@ -35,15 +36,26 @@ void GameObject::SetSize(float w, float h)
 	this->m_height = h;
 };
 
+void GameObject::ResizeTexture( int x, int y, int w, int h)
+{
+	m_shape->setTextureRect(sf::IntRect(x, y, h, w));
+}
+
+void GameObject::SetTexture(Texture* texture)
+{
+	m_shape->setTexture(texture);
+};
+
 void GameObject::SetBounce(bool bounce)
 {
 	this->m_bounce = true;
-};
+}
+
 
 void GameObject::Draw()
 {
 	m_renderer->draw(*m_shape);
-};
+}
 
 void GameObject::SetColor(Color* color)
 {

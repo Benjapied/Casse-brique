@@ -1,4 +1,5 @@
 #pragma once
+#include <vector>
 namespace sf {
 	class Texture;
 }
@@ -7,12 +8,12 @@ class GameObject;
 class TextureManager
 {
 public:
-	sf::Texture* m_texture;
+	std::vector <sf::Texture*> m_tab;
 
-	TextureManager(const char* path);
+	TextureManager();
 
-	void SetTexture(GameObject* obj);
+	void addTexture(const char* path);
 
-	void Resize(GameObject* obj, int x, int y, int w, int h);
+	void SetTexture(GameObject* obj, int index);
 };
 

@@ -1,12 +1,13 @@
 #pragma once
 #include <SFML/System.hpp>
-
+#include "TextureManager.h"
 
 namespace sf
 {
 	class Shape;
 	class RenderWindow;
 	class Color;
+	class Texture;
 }
 
 class GameObject
@@ -29,6 +30,10 @@ public:
 	void SetPosition(float x, float y);
 
 	void SetSize(float w, float h);
+
+	void ResizeTexture(int x, int y, int w, int h);
+
+	void SetTexture(sf::Texture* texture);
 
 	void SetBounce(bool bounce);
 

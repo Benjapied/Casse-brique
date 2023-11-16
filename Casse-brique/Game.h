@@ -8,6 +8,7 @@
 
 class Brick;
 class Color;
+class TextureManager;
 
 class Game
 {
@@ -17,7 +18,7 @@ public:
 	std::vector<Rectangle*> m_wallArray;
 	std::vector<Brick*> m_brickArray;
 	std::vector<Bullet*> m_bulletArray;
-	std::vector<sf::Color*> m_ColorArray;
+	TextureManager* m_textureArray;
 	Rectangle* m_cannon;
 	sf::Color cRed;
 	sf::Color cBlue;
@@ -30,7 +31,6 @@ public:
 	void Shoot();
 
 	void LoadLevel(const char* path);
-	void SetTextureBrick();
 
 	void BulletMove(float dT);
 	void BulletWallCol();

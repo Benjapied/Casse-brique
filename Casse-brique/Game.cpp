@@ -6,6 +6,7 @@
 #include <string>
 #include <iostream>
 #include "TextureManager.h"
+#include <vector>
 
 Game::Game(sf::RenderWindow* renderer) {
 
@@ -14,9 +15,9 @@ Game::Game(sf::RenderWindow* renderer) {
     cBlue = sf::Color::Blue;
     cYellow = sf::Color::Yellow;
 
-    m_ColorArray.push_back(&cRed);
-    m_ColorArray.push_back(&cBlue);
-    m_ColorArray.push_back(&cGreen);
+    m_textureArray = new TextureManager();
+    m_textureArray->addTexture("img/pig.jpg");
+    m_textureArray->addTexture("img/pigLow.jpg");
 
 	m_renderer = renderer;
     Rectangle* wallUp = new Rectangle(m_renderer);
@@ -50,6 +51,10 @@ void Game::LoadLevel(const char* path)
 {
     std::string text = FileManager::returnText(path);
 
+    std::vector<sf::Texture*> pigArray;
+    pigArray.push_back(this->m_textureArray->m_tab[1]);
+    pigArray.push_back(this->m_textureArray->m_tab[0]);
+
     std::cout << text;
 
     float x = 0;
@@ -65,23 +70,10 @@ void Game::LoadLevel(const char* path)
             x = 0;
         }
         else if (text[i] == 'b') {
-            m_brickArray.push_back(new Brick(m_renderer, m_ColorArray, x, y));
+            m_brickArray.push_back(new Brick(m_renderer, pigArray, x, y));
             x += 128;
         }
 
-    }
-
-    SetTextureBrick();
-}
-
-void Game::SetTextureBrick()
-{
-    TextureManager texturePig("img/pig.jpg");
-
-    for (int i = 0; i < m_brickArray.size(); i++)
-    {
-        texturePig.SetTexture(m_brickArray[i]);
-        
     }
 }
 
@@ -144,7 +136,7 @@ void Game::DeleteBrick() {
 
 void Game::DeleteBall() {
     for (int i = 0; i < m_bulletArray.size(); i++) {
-        if (m_bulletArray[i]->m_positionX >= 980) {
+        if (m_bulletArray[i]->m_positionY >= 980) {
             delete m_bulletArray[i];
             m_bulletArray.erase(m_bulletArray.begin() + i);
         }
